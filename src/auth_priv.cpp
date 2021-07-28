@@ -1123,7 +1123,7 @@ int AuthMD5::password_to_key(const unsigned char *password,
               OctetStr(engine_id, engine_id_len).get_printable());
 #endif
 
-  MD5HashStateType md5_hash_state = nullptr;
+  MD5HashStateType md5_hash_state{};
   unsigned char password_buf[65];
   unsigned long password_index = 0;
   unsigned long count = 0;
@@ -1176,7 +1176,7 @@ int AuthMD5::hash(const unsigned char *data,
                   const unsigned int   data_len,
                   unsigned char       *digest) const
 {
-  MD5HashStateType md5_hash_state = nullptr;
+  MD5HashStateType md5_hash_state{};
 
   MD5_INIT(&md5_hash_state);
   MD5_PROCESS(&md5_hash_state, data, data_len);
@@ -1190,7 +1190,7 @@ int AuthMD5::auth_out_msg(const unsigned char *key,
                           const int      msg_len,
                           unsigned char *auth_par_ptr)
 {
-  MD5HashStateType md5_hash_state = nullptr;
+  MD5HashStateType md5_hash_state{};
   int           key_len = 16; /* We use only 16 Byte Key! */
   unsigned char digest[16];
   unsigned char k_ipad[65];   /* inner padding - key XORd with ipad */

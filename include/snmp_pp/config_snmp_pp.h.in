@@ -218,8 +218,8 @@ typedef ULONGLONG pp_uint64;
 typedef LONGLONG pp_int64;
 #    endif
 #else // not WIN32
-typedef uint64_t pp_uint64;
-typedef int64_t pp_int64;
+typedef unsigned long long pp_uint64;
+typedef long long pp_int64;
 #endif
 
 // Define a type used for sockets
