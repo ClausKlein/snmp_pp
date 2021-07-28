@@ -216,7 +216,7 @@ int SnmpMessage::load(
                       const OctetStr* security_name,
                       const int security_model)
 {
-  int status;
+  int status = 0;
   const Pdu *pdu = &cpdu;
   Pdu temppdu;
 
@@ -225,7 +225,7 @@ int SnmpMessage::load(
     return SNMP_CLASS_INVALID_PDU;
 
   // create a raw pdu
-  snmp_pdu *raw_pdu;
+  snmp_pdu *raw_pdu = nullptr;
   raw_pdu = snmp_pdu_create((int) pdu->get_type());
 
   Oid enterprise;
@@ -348,7 +348,7 @@ int SnmpMessage::load(
       // these are hooks into an SNMP++ oid
       // and therefor the raw_pdu enterprise
       // should not free them. null them out!!
-      SmiLPOID rawOid;
+      SmiLPOID rawOid = nullptr;
       rawOid = enterprise.oidval();
       raw_pdu->enterprise = rawOid->ptr;
       raw_pdu->enterprise_length = (int) rawOid->len;
@@ -395,10 +395,10 @@ int SnmpMessage::load(
   }
   // load up the payload
   // for all Vbs in list, add them to the pdu
-  int vb_count;
+  int vb_count = 0;
   Vb tempvb;
   Oid tempoid;
-  SmiLPOID smioid;
+  SmiLPOID smioid = nullptr;
   SmiVALUE smival;
 
   vb_count = pdu->get_vb_count();
@@ -549,7 +549,7 @@ int SnmpMessage::unload(Pdu &pdu,                 // Pdu object
     return SNMP_CLASS_INVALID;
 
   snmp_pdu *raw_pdu = snmp_pdu_create(0); // free with snmp_free_pdu(raw_pdu)
-  int status;
+  int status = 0;
 
 #ifdef _SNMPv3
   if ((security_model) && (security_name) && (engine_id) && (snmp_session))
@@ -670,7 +670,7 @@ int SnmpMessage::unload(Pdu &pdu,                 // Pdu object
   // vbs
   Vb tempvb;
   Oid tempoid;
-  struct   variable_list *vp;
+  struct   variable_list *vp = nullptr;
   int vb_nr = 1;
 
   for(vp = raw_pdu->variables; vp; vp = vp->next_variable, vb_nr++) {

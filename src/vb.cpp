@@ -121,7 +121,7 @@ int Vb::get_value(int &i) const
        iv_vb_value->valid() &&
        (iv_vb_value->get_syntax() == sNMP_SYNTAX_INT32 ))
    {
-     long lval;
+     long lval = 0;
      lval = *((SnmpInt32 *)iv_vb_value);// SnmpInt32 includes cast to long,
      i = (int) lval;                    // but not to int.
      return SNMP_CLASS_SUCCESS;
@@ -140,7 +140,7 @@ int Vb::get_value(unsigned int &i) const
        (iv_vb_value->get_syntax() == sNMP_SYNTAX_GAUGE32 ) ||
        (iv_vb_value->get_syntax() == sNMP_SYNTAX_TIMETICKS )))
   {
-    unsigned long lval;
+    unsigned long lval = 0;
     lval = *((SnmpUInt32 *)iv_vb_value);
     i = (unsigned int)lval;
     return SNMP_CLASS_SUCCESS;
@@ -362,7 +362,7 @@ void Vb::set_syntax(const SmiUINT32 syntax)
 	}
 }
 
-static char blank_string[] = "";
+const static char blank_string[] = "";
 
 // return the printabel value
 const char *Vb::get_printable_value() const

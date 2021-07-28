@@ -114,7 +114,7 @@ Oid& Oid::operator=(const char *dotted_oid_string)
 // delete allocated space
 Oid& Oid::operator+=(const char *a)
 {
-  unsigned int n;
+  unsigned int n = 0;
 
   if (!a) return *this;
 
@@ -189,7 +189,7 @@ const char *Oid::get_printable(const unsigned long start,
 {
   if (!m_changed && (buffer == iv_str))  return buffer;
 
-  unsigned long nz;
+  unsigned long nz = 0;
   unsigned long my_start = start - 1;
   unsigned long my_end   = my_start + n;
 
@@ -240,8 +240,8 @@ int Oid::StrToOid(const char *str, SmiLPOID dstOid) const
   unsigned int index = 0;
 
   // make a temp buffer to copy the data into first
-  SmiLPUINT32 temp;
-  unsigned int nz;
+  SmiLPUINT32 temp = nullptr;
+  unsigned int nz = 0;
 
   if (str && *str)
   {
