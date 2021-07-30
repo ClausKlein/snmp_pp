@@ -147,7 +147,7 @@ class DLLOPT Oid : public SnmpSyntax
    * @param raw_oid - array of oid values
    * @param oid_len - length of array
    */
-  Oid(const SmiLPUINT32 raw_oid, int oid_len)
+  Oid(const SmiUINT32* raw_oid, int oid_len)
     : iv_str(0), iv_part_str(0), m_changed(true)
   {
     smival.syntax = sNMP_SYNTAX_OID;
