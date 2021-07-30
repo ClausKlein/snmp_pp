@@ -652,7 +652,7 @@ int SnmpMessage::unload(Pdu &pdu,                 // Pdu object
     case 6: { // enterprise specific
       // base id + specific #
       Oid eOid = enterprise;
-      eOid += 0ul;
+      eOid += 0u;
       eOid += raw_pdu->specific_type;
       pdu.set_notify_id(eOid);
       break;
@@ -702,7 +702,7 @@ int SnmpMessage::unload(Pdu &pdu,                 // Pdu object
       // object id
     case sNMP_SYNTAX_OID:
       {
-	Oid oid((unsigned long*) vp->val.objid,
+	Oid oid((SmiLPUINT32) vp->val.objid,
 		(int) vp->val_len);
 	tempvb.set_value(oid);
         if ((vb_nr == 2) &&

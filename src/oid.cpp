@@ -141,7 +141,7 @@ Oid& Oid::operator+=(const char *a)
 
 //===============[Oid::set_data ]==---=====================================
 // copy data from raw form...
-void Oid::set_data(const SmiLPUINT32 raw_oid,
+void Oid::set_data(const SmiUINT32* raw_oid,
                    const unsigned int oid_len)
 {
   if (smival.value.oid.len < oid_len)
