@@ -340,7 +340,7 @@ class DLLOPT Oid : public SnmpSyntax
    *
    * @return Value on the given index
    */
-  unsigned long &operator[](const unsigned int index)
+  SmiUINT32 &operator[](const unsigned int index)
     { m_changed = true; return smival.value.oid.ptr[index]; }
 
   /**
@@ -352,7 +352,7 @@ class DLLOPT Oid : public SnmpSyntax
    *
    * @return Value on the given position
    */
-  unsigned long operator[](const unsigned int index) const
+  SmiUINT32 operator[](const unsigned int index) const
     { return (index >= len()) ? 0 : smival.value.oid.ptr[index]; }
 
   /**
@@ -370,7 +370,7 @@ class DLLOPT Oid : public SnmpSyntax
    * @param raw_oid - Array of new values
    * @param oid_len - Length of the array raw_oid
    */
-  void set_data(const unsigned long *raw_oid, const unsigned int oid_len);
+  void set_data(const SmiLPUINT32 raw_oid, const unsigned int oid_len);
 
   /**
    * Set the data from raw form.

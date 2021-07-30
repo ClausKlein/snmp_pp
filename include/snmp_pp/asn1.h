@@ -37,7 +37,7 @@ namespace Snmp_pp {
 #endif
 
 #ifndef EIGHTBIT_SUBIDS
-typedef unsigned long oid;
+typedef uint32_t    oid;
 #define MAX_SUBID   0xFFFFFFFF
 #else
 typedef unsigned char oid;

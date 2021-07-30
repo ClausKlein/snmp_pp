@@ -676,7 +676,7 @@ int SnmpMessage::unload(Pdu &pdu,                 // Pdu object
   for(vp = raw_pdu->variables; vp; vp = vp->next_variable, vb_nr++) {
 
     // extract the oid portion
-    tempoid.set_data((unsigned long *)vp->name,
+    tempoid.set_data((SmiUINT32 *)vp->name,
                      (unsigned int) vp->name_length);
     tempvb.set_oid(tempoid);
 

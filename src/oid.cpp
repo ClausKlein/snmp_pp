@@ -141,7 +141,7 @@ Oid& Oid::operator+=(const char *a)
 
 //===============[Oid::set_data ]==---=====================================
 // copy data from raw form...
-void Oid::set_data(const unsigned long *raw_oid,
+void Oid::set_data(const SmiLPUINT32 raw_oid,
                    const unsigned int oid_len)
 {
   if (smival.value.oid.len < oid_len)
@@ -220,7 +220,7 @@ const char *Oid::get_printable(const unsigned long start,
       *cur_ptr++ = '.';
 
     // convert data element to a string
-    cur_ptr += sprintf(cur_ptr, "%lu", smival.value.oid.ptr[index]);
+    cur_ptr += sprintf(cur_ptr, "%" PRIu32, smival.value.oid.ptr[index]);
   }
 
   if (buffer == iv_str)
@@ -363,7 +363,7 @@ int Oid::OidToStr(const SmiOID *srcOid,
   for (unsigned long index = 0; index < srcOid->len; ++index)
   {
     // convert data element to a string
-    int cur_len = sprintf(szNumber, "%lu", srcOid->ptr[index]);
+    int cur_len = sprintf(szNumber, "%" PRIu32, srcOid->ptr[index]);
 
     // verify len is not over
     if (totLen + cur_len + 1 >= size)
