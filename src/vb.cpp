@@ -153,7 +153,7 @@ int Vb::get_value(uint32_t &i) const
 //--------------[ Vb::get_value(long int &i) ]-------------------------
 // get the signed long int
 // returns 0 on success and a value
-int Vb::get_value(SnmpInt32 &i) const
+int Vb::get_value(long &i) const
 {
    if (iv_vb_value &&
        iv_vb_value->valid() &&
