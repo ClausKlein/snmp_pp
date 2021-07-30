@@ -198,23 +198,6 @@ typedef struct sockaddr_in SocketAddrType;
 #    define HAVE_REENTRANT_GETHOSTBYADDR
 #endif
 
-// TODO: why again? CK
-#if 0
-// see cmake_libsnmp.h.in
-#ifdef WIN32
-#    include <windows.h>
-#    if defined(HAVE_WINSOCK2_H)
-#        include <winsock2.h>
-#    endif
-#    ifdef HAVE_WSTCPIP_H
-#        include <ws2tcpip.h>
-#    endif
-#    ifdef HAVE_WSPIAPI_H
-#        include <wspiapi.h>
-#    endif
-#endif
-#endif
-
 // Define a unsigned 64 bit integer:
 typedef uint64_t pp_uint64;
 typedef int64_t pp_int64;

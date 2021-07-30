@@ -115,7 +115,7 @@ void Vb::free_vb()
 //---------------------[ Vb::get_value(int &i) ]----------------------
 // get value int
 // returns 0 on success and value
-int Vb::get_value(int &i) const
+int Vb::get_value(int32_t &i) const
 {
    if (iv_vb_value &&
        iv_vb_value->valid() &&
@@ -131,7 +131,7 @@ int Vb::get_value(int &i) const
 
 // get the unsigned int
 // returns 0 on success and a value
-int Vb::get_value(unsigned int &i) const
+int Vb::get_value(uint32_t &i) const
 {
   if (iv_vb_value &&
       iv_vb_value->valid() &&
@@ -149,10 +149,11 @@ int Vb::get_value(unsigned int &i) const
 }
 
 
+#if 0
 //--------------[ Vb::get_value(long int &i) ]-------------------------
 // get the signed long int
 // returns 0 on success and a value
-int Vb::get_value(long &i) const
+int Vb::get_value(SnmpInt32 &i) const
 {
    if (iv_vb_value &&
        iv_vb_value->valid() &&
@@ -182,6 +183,7 @@ int Vb::get_value(unsigned long &i) const
   }
   return SNMP_CLASS_INVALID;
 }
+#endif
 
 //-----------------[  Vb::get_value(pp_uint64 &i) ]--------------
 // get the pp_uint64
