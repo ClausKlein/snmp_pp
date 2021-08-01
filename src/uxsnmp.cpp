@@ -2229,7 +2229,7 @@ bool Snmp::start_poll_thread(const int timeout)
 
     // start the ProcessThread function....
 #    ifdef WIN32
-    LPDWORD id;
+    DWORD id;
     m_hThread = CreateThread(
         NULL, 0, (LPTHREAD_START_ROUTINE)&Snmp::process_thread, this, 0, &id);
     if (m_hThread == NULL)
