@@ -179,14 +179,14 @@ int v3MP::EngineIdTable::get_entry(OctetStr &engine_id,
     return SNMPv3_MP_ERROR;
 
   /* split up port from hostport */
-  strcpy(host, hostport.get_printable());
+  strncpy(host, hostport.get_printable(), sizeof(host));
 
   ptr = strstr((char*)host,"/");
   if (!ptr)
     return SNMPv3_MP_ERROR;
 
   *ptr = '\0';
-  port = atol(ptr + 1);
+  port = std::stoi(ptr + 1);
 
   /* Check for IPv6 address with [] */
   if (host[0] == '[')
