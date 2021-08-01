@@ -58,6 +58,7 @@
 #ifdef CNF_STDCXX_98_HEADERS
 # include <cctype>
 # include <cerrno>
+# include <cinttypes>
 # include <climits>
 # include <csignal>
 # include <cstddef>
