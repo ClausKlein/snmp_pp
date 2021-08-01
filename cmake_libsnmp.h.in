@@ -61,10 +61,12 @@
 # include <climits>
 # include <csignal>
 # include <cstddef>
+# include <cstdint>
 # include <cstdio>
 # include <cstdlib>
 # include <cstring>
 # include <ctime>
+# include <memory>
 # include <string> // std::stoi() used
 #else
 # ifdef HAVE_STDIO_H
