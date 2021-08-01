@@ -175,7 +175,7 @@ int v3MP::EngineIdTable::get_entry(OctetStr &engine_id,
   char *ptr = nullptr;
 
   /* Check length */
-  if (hostport.len() > MAX_HOST_NAME_LENGTH)
+  if (hostport.len() >= MAX_HOST_NAME_LENGTH)
     return SNMPv3_MP_ERROR;
 
   /* split up port from hostport */

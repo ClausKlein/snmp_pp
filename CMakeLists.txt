@@ -545,7 +545,7 @@ if(SNMP_PP_EXAMPLES)
   endforeach()
 
   enable_testing()
-  add_test(NAME test_app COMMAND test_app)
+  add_test(NAME test_app COMMAND test_app 127.0.0.1 trap)
   add_test(NAME send_trap COMMAND test_app localhost trap)
 endif()
 
