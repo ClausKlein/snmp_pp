@@ -316,8 +316,8 @@ class DLLOPT v3MP
 		 OctetStr &securityName,
 		 OctetStr &contextEngineID,
 		 OctetStr &contextName,
-		 long     &securityLevel,
-		 long     &msgSecurityModel,
+		 SmiINT32     &securityLevel,
+		 SmiINT32     &msgSecurityModel,
 		 snmp_version &spp_version,
 		 UdpAddress from_address);
 

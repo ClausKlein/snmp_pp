@@ -392,7 +392,7 @@ int receive_snmp_response(SnmpSocket sock, Snmp& snmp_session, Pdu& pdu,
     OctetStr     security_name;
 
 #ifdef _SNMPv3
-    long int security_model = 0;
+    SmiINT32 security_model = 0;
     if (snmpmsg.is_v3_message())
     {
         int returncode = snmpmsg.unloadv3(pdu, version, engine_id,
@@ -504,7 +504,7 @@ int receive_snmp_notification(
     OctetStr     security_name;
 
 #ifdef _SNMPv3
-    long int security_model = SecurityModel_any;
+    SmiINT32 security_model = SecurityModel_any;
     if (snmpmsg.is_v3_message())
     {
         int returncode = snmpmsg.unloadv3(pdu, version, engine_id,

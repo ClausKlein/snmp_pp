@@ -194,7 +194,7 @@ int SnmpMessage::unloadv3(Pdu &pdu,                // Pdu returned
                           snmp_version &version,   // version
                           OctetStr &engine_id,     // optional v3
                           OctetStr &security_name, // optional v3
-                          long int &security_model,
+                          SmiINT32 &security_model,
                           UdpAddress &from_addr,
 			  Snmp &snmp_session)
 {
@@ -539,7 +539,7 @@ int SnmpMessage::unload(Pdu &pdu,                 // Pdu object
 			snmp_version &version,    // SNMP version #
                         OctetStr *engine_id,      // optional v3
                         OctetStr *security_name,  // optional v3
-                        long int *security_model,
+                        SmiINT32 *security_model,
                         UdpAddress *from_addr,
                         Snmp *snmp_session)
 {
@@ -554,7 +554,7 @@ int SnmpMessage::unload(Pdu &pdu,                 // Pdu object
 #ifdef _SNMPv3
   if ((security_model) && (security_name) && (engine_id) && (snmp_session))
   {
-    long int security_level = SNMP_SECURITY_LEVEL_NOAUTH_NOPRIV;
+    SmiINT32 security_level = SNMP_SECURITY_LEVEL_NOAUTH_NOPRIV;
     OctetStr context_name;
     OctetStr context_engine_id;
     status = snmp_session->get_mpv3()->snmp_parse(snmp_session, raw_pdu,

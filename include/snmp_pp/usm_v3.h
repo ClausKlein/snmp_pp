@@ -180,9 +180,9 @@ struct UsmUserTableEntry {
   unsigned char *usmUserEngineID;     long int usmUserEngineIDLength;
   unsigned char *usmUserName;         long int usmUserNameLength;
   unsigned char *usmUserSecurityName; long int usmUserSecurityNameLength;
-  long int  usmUserAuthProtocol;
+  SmiINT32  usmUserAuthProtocol;
   unsigned char *usmUserAuthKey;      long int usmUserAuthKeyLength;
-  long int  usmUserPrivProtocol;
+  SmiINT32  usmUserPrivProtocol;
   unsigned char *usmUserPrivKey;      long int usmUserPrivKeyLength;
 };
 
@@ -190,17 +190,17 @@ struct UsmUser {
   unsigned char *engineID;     long int engineIDLength;
   unsigned char *usmUserName;  long int usmUserNameLength;
   unsigned char *securityName; long int securityNameLength;
-  long int  authProtocol;
+  SmiINT32  authProtocol;
   unsigned char *authKey;      long int authKeyLength;
-  long int  privProtocol;
+  SmiINT32  privProtocol;
   unsigned char *privKey;      long int privKeyLength;
 };
 
 struct UsmUserNameTableEntry {
   OctetStr usmUserName;
   OctetStr usmUserSecurityName;
-  long int  usmUserAuthProtocol;
-  long int  usmUserPrivProtocol;
+  SmiINT32  usmUserAuthProtocol;
+  SmiINT32  usmUserPrivProtocol;
   unsigned char *authPassword;        long int authPasswordLength;
   unsigned char *privPassword;        long int privPasswordLength;
 };
@@ -302,8 +302,8 @@ public:
    *           SNMP_v3_USM_ERROR (memory error, not initialized)
    */
   int add_usm_user(const OctetStr& security_name,
-		   const long int  auth_protocol,
-		   const long int  priv_protocol,
+		   const SmiINT32  auth_protocol,
+		   const SmiINT32  priv_protocol,
 		   const OctetStr& auth_password,
 		   const OctetStr& priv_password);
 
@@ -331,8 +331,8 @@ public:
    */
   int add_usm_user(const OctetStr& user_name,
 		   const OctetStr& security_name,
-		   const long int  auth_protocol,
-		   const long int  priv_protocol,
+		   const SmiINT32  auth_protocol,
+		   const SmiINT32  priv_protocol,
 		   const OctetStr& auth_password,
 		   const OctetStr& priv_password);
 
@@ -367,15 +367,15 @@ public:
    */
   int add_usm_user(const OctetStr& user_name,
 		   const OctetStr& security_name,
-		   const long int  auth_protocol,
-		   const long int  priv_protocol,
+		   const SmiINT32  auth_protocol,
+		   const SmiINT32  priv_protocol,
 		   const OctetStr& auth_password,
 		   const OctetStr& priv_password,
 		   const OctetStr& engine_id);
 
   int add_usm_user(const OctetStr& security_name,
-		   const long int  auth_protocol,
-		   const long int  priv_protocol,
+		   const SmiINT32  auth_protocol,
+		   const SmiINT32  priv_protocol,
 		   const OctetStr& auth_password,
 		   const OctetStr& priv_password,
 		   const OctetStr& engine_id)
@@ -688,8 +688,7 @@ public:
    *           SNMPv3_USM_UNKNOWN_ENGINEID ( not found)
    */
   int get_time(const OctetStr &engine_id,
-	       long int *engine_boots, long int *engine_time);
-
+	       SmiINT32 *engine_boots, SmiINT32 *engine_time);
 
 
   /**
@@ -701,7 +700,7 @@ public:
    * @return - SNMPv3_USM_ERROR (not initialized),
    *           SNMPv3_USM_OK (entry found, values are filled)
    */
-  int get_local_time(long int *engine_boots, long int *engine_time) const;
+  int get_local_time(SmiINT32 *engine_boots, SmiINT32 *engine_time) const;
 
 
   /**
@@ -977,7 +976,7 @@ public:
            unsigned char *securityParameters, // for the received message
            int securityParametersLength,
            int securityParametersPosition,
-           long int securityLevel,            // Level of Security
+           SmiINT32 securityLevel,            // Level of Security
            unsigned char *wholeMsg,           // as received on the wire
            int wholeMsgLength,                // length as received on the wire
            unsigned char *msgData,

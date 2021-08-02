@@ -119,7 +119,7 @@ class DLLOPT SnmpMessage
                     snmp_version &version,       // version
                     OctetStr *engine_id,         // optional v3
                     OctetStr *security_name, // optional v3
-                    long int *security_model,
+                    SmiINT32 *security_model,
 		    UdpAddress *from_addr,
                     Snmp *snmp_session);
  public:
@@ -142,7 +142,7 @@ class DLLOPT SnmpMessage
                       snmp_version &version,     // version
                       OctetStr &engine_id,       // optional v3
                       OctetStr &security_name,   // optional v3
-                      long int &security_model,
+                      SmiINT32 &security_model,
 		      UdpAddress &from_addr,
                       Snmp &snmp_session);
 

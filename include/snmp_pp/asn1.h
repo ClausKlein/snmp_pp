@@ -127,13 +127,13 @@ typedef struct sockaddr_in  ipaddr;
 // pdu
 struct snmp_pdu {
     int        command;      // pdu type
-    unsigned long  reqid;    // Request id
+    SmiUINT32  reqid;    // Request id
 #ifdef _SNMPv3
-    unsigned long  msgid;
-    unsigned long  maxsize_scopedpdu;
+    SmiUINT32  msgid;
+    SmiUINT32  maxsize_scopedpdu;
 #endif
-    unsigned long  errstat;  // Error status
-    unsigned long  errindex; // Error index
+    SmiUINT32  errstat;  // Error status
+    SmiUINT32  errindex; // Error index
 
     // Trap information
     oid        *enterprise;   // System OID
@@ -141,7 +141,7 @@ struct snmp_pdu {
     ipaddr  agent_addr;       // address of object generating trap
     int        trap_type;     // trap type
     int        specific_type; // specific type
-    unsigned long  time;      // Uptime
+    SmiUINT32  time;      // Uptime
 
     // vb list
     struct variable_list *variables;
@@ -154,7 +154,7 @@ struct variable_list {
     int        name_length;                 // number of subid's in name
     unsigned char   type;                   // ASN type of variable
     union {                                 // value of variable
-    long    *integer;
+    SmiINT32    *integer;
     unsigned char     *string;
     oid    *objid;
     unsigned char   *bitstring;
@@ -164,46 +164,46 @@ struct variable_list {
 };
 
 struct counter64 {
-    unsigned long high;
-    unsigned long low;
+    SmiUINT32 high;
+    SmiUINT32 low;
 };
 
 
 // prototypes for encoding routines
 DLLOPT unsigned char *asn_parse_int(unsigned char *data, int *datalength,
                                     unsigned char *type,
-                                    long *intp);
+                                    SmiINT32 *intp);
 
 
 inline unsigned char *asn_parse_int(unsigned char *data, int *datalength,
                                     unsigned char *type,
-                                    unsigned long *intp)
-{ return asn_parse_int(data, datalength, type, (long*)intp); }
+                                    SmiUINT32 *intp)
+{ return asn_parse_int(data, datalength, type, (SmiINT32*)intp); }
 
 
-DLLOPT unsigned char *asn_parse_unsigned_int(unsigned char *data,        
+DLLOPT unsigned char *asn_parse_unsigned_int(unsigned char *data,
                                              int *datalength,
                                              unsigned char *type,
-                                             unsigned long *intp);
-inline unsigned char *asn_parse_unsigned_int(unsigned char *data,        
+                                             SmiINT32 *intp);
+inline unsigned char *asn_parse_unsigned_int(unsigned char *data,
                                              int *datalength,
                                              unsigned char *type,
-                                             long *intp)
-{ return asn_parse_unsigned_int(data, datalength, type, (unsigned long*)intp); }
+                                             SmiUINT32 *intp)
+{ return asn_parse_unsigned_int(data, datalength, type, (SmiINT32*)intp); }
 
 DLLOPT unsigned char *asn_build_int(unsigned char *data, int *datalength,
                                     const unsigned char type,
-                                    const long *intp);
+                                    const SmiINT32 *intp);
 
 inline unsigned char *asn_build_int(unsigned char *data, int *datalength,
                                     const unsigned char type,
-                                    const unsigned long *intp)
-{ return asn_build_int(data, datalength, type, (const long*)intp); }
+                                    const SmiUINT32 *intp)
+{ return asn_build_int(data, datalength, type, (const SmiINT32*)intp); }
 
 DLLOPT unsigned char *asn_build_unsigned_int(unsigned char *data,
                                              int *datalength,
                                              unsigned char type,
-                                             unsigned long *intp);
+                                             SmiUINT32 *intp);
 
 DLLOPT unsigned char *asn_parse_string(unsigned char *data, int *datalength,
                                        unsigned char *type,
@@ -275,7 +275,7 @@ DLLOPT void snmp_free_pdu(struct snmp_pdu *pdu);
 DLLOPT int snmp_build(struct snmp_pdu *pdu,
                       unsigned char *packet,
                       int *out_length,
-                      const long version,
+                      const snmp_version version,
                       const unsigned char* community, const int community_len);
 
 DLLOPT void snmp_add_var(struct snmp_pdu *pdu,
@@ -339,10 +339,10 @@ DLLOPT void clear_pdu(struct snmp_pdu *pdu, bool clear_all = false);
  */
 DLLOPT unsigned char *asn1_build_header_data(unsigned char *outBuf,
 					     int *maxLength,
-					     long msgID,
-					     long maxMessageSize,
+					     SmiINT32 msgID,
+					     SmiINT32 maxMessageSize,
 					     unsigned char msgFlags,
-					     long securityModel);
+					     SmiINT32 securityModel);
 
 /**
  * Parse the filled HeaderData of a SNMPv3 message and return
@@ -371,9 +371,9 @@ DLLOPT unsigned char *asn1_build_header_data(unsigned char *outBuf,
  *            Returns NULL on any error.
  */
 DLLOPT unsigned char *asn1_parse_header_data(unsigned char *buf, int *buf_len,
-					     long *msg_id, long *msg_max_size,
+					     SmiINT32 *msg_id, SmiINT32 *msg_max_size,
 					     unsigned char *msg_flags,
-					     long *msg_security_model);
+					     SmiINT32 *msg_security_model);
 
 /**
  * Parse the ScopedPDU and return the encoded values.

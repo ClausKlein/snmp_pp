@@ -517,22 +517,22 @@ set_target_properties(
 
 if(SNMP_PP_EXAMPLES)
   set(EXAMPLE_SOURCE_FILES
-      consoleExamples/receive_trap.cpp
-      consoleExamples/snmpBulk.cpp
-      consoleExamples/snmpDiscover.cpp
-      consoleExamples/snmpGet.cpp
-      consoleExamples/snmpInform.cpp
-      consoleExamples/snmpNext.cpp
-      consoleExamples/snmpNextAsync.cpp
-      consoleExamples/snmpPasswd.cpp
-      consoleExamples/snmpSet.cpp
-      consoleExamples/snmpTraps.cpp
-      consoleExamples/snmpWalk.cpp
+      # consoleExamples/receive_trap.cpp
+      # consoleExamples/snmpBulk.cpp
+      # consoleExamples/snmpDiscover.cpp
+      # consoleExamples/snmpGet.cpp
+      # consoleExamples/snmpInform.cpp
+      # consoleExamples/snmpNext.cpp
+      # consoleExamples/snmpNextAsync.cpp
+      # consoleExamples/snmpPasswd.cpp
+      # consoleExamples/snmpSet.cpp
+      # consoleExamples/snmpTraps.cpp
+      # consoleExamples/snmpWalk.cpp
       consoleExamples/test_app.cpp
   )
 
   if(NOT MSVC)
-    list(APPEND EXAMPLE_SOURCE_FILES consoleExamples/snmpWalkThreads.cpp)
+    # list(APPEND EXAMPLE_SOURCE_FILES consoleExamples/snmpWalkThreads.cpp)
   endif()
 
   foreach(examplesourcefile ${EXAMPLE_SOURCE_FILES})

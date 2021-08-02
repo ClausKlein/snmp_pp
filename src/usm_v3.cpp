@@ -115,7 +115,7 @@ public:
    * @return - SNMPv3_USM_ERROR (no memory) or SNMPv3_USM_OK
    */
   int add_entry(const OctetStr &engine_id,
-                const long int engine_boots, const long int engine_time);
+                const SmiINT32 engine_boots, const SmiINT32 engine_time);
 
   /**
    * Delete this engine id from the table.
@@ -138,7 +138,7 @@ public:
    *           SNMPv3_USM_UNKNOWN_ENGINEID ( not found)
    */
   int get_time(const OctetStr &engine_id,
-               long int &engine_boots, long int &engine_time);
+               SmiINT32 &engine_boots, SmiINT32 &engine_time);
 
   /**
    * Return the engineBoots and engineTime of this snmp entity.
@@ -149,7 +149,7 @@ public:
    * @return - SNMPv3_USM_ERROR (not initialized),
    *           SNMPv3_USM_OK (entry found, values are filled)
    */
-  int get_local_time(long int &engine_boots, long int &engine_time);
+  int get_local_time(SmiINT32 &engine_boots, SmiINT32 &engine_time);
 
   /**
    * Return the engineBoots value of this snmp entity.
@@ -181,7 +181,7 @@ public:
    *           SNMPv3_USM_UNKNOWN_ENGINEID
    */
   int check_time(const OctetStr &engine_id,
-                 const long int engine_boots, const long int engine_time);
+                 const SmiINT32 engine_boots, const SmiINT32 engine_time);
 
   /**
    * Check if the given engineID is known: If the USM is in
@@ -200,9 +200,9 @@ private:
   {
     unsigned char engine_id[MAXLENGTH_ENGINEID];
     int engine_id_len;
-    long int engine_boots;
-    long int time_diff;
-    long int latest_received_time;
+    SmiINT32 engine_boots;
+    SmiINT32 time_diff;
+    SmiINT32 latest_received_time;
   };
 
   struct Entry_T *table; ///< Array of entries
@@ -252,8 +252,8 @@ public:
    */
   int add_entry(const OctetStr& user_name,
 		const OctetStr& security_name,
-		const long int  auth_proto,
-		const long int  priv_proto,
+		const SmiINT32  auth_proto,
+		const SmiINT32  priv_proto,
 		const OctetStr& auth_pass,
 		const OctetStr& priv_pass);
 
@@ -521,8 +521,8 @@ public:
    */
   int add_entry(const OctetStr &engine_id,
 		const OctetStr &user_name,  const OctetStr &sec_name,
-		const long int  auth_proto, const OctetStr &auth_key,
-		const long int  priv_proto, const OctetStr &priv_key);
+		const SmiINT32  auth_proto, const OctetStr &auth_key,
+		const SmiINT32  priv_proto, const OctetStr &priv_key);
 
   /**
    * Replace a localized key of the user and engine_id in the
@@ -571,8 +571,8 @@ private:
 struct UsmSecurityParameters {
   unsigned char  msgAuthoritativeEngineID[MAXLENGTH_ENGINEID];
   long int       msgAuthoritativeEngineIDLength;
-  long int       msgAuthoritativeEngineBoots;
-  long int       msgAuthoritativeEngineTime;
+  SmiINT32       msgAuthoritativeEngineBoots;
+  SmiINT32       msgAuthoritativeEngineTime;
   unsigned char  msgUserName[MAXLEN_USMUSERNAME];
   long int       msgUserNameLength;
   unsigned char *msgAuthenticationParameters;
@@ -814,8 +814,8 @@ int USM::add_localized_user(const OctetStr &engine_id,
 
 int USM::add_usm_user(const OctetStr& user_name,
 		      const OctetStr& security_name,
-		      const long int  auth_protocol,
-		      const long int  priv_protocol,
+		      const SmiINT32  auth_protocol,
+		      const SmiINT32  priv_protocol,
 		      const OctetStr& auth_password,
 		      const OctetStr& priv_password)
 {
@@ -837,8 +837,8 @@ int USM::add_usm_user(const OctetStr& user_name,
 
 int USM::add_usm_user(const OctetStr& user_name,
 		      const OctetStr& security_name,
-		      const long int  auth_protocol,
-		      const long int  priv_protocol,
+		      const SmiINT32  auth_protocol,
+		      const SmiINT32  priv_protocol,
 		      const OctetStr& auth_password,
 		      const OctetStr& priv_password,
 		      const OctetStr& engine_id)
@@ -875,8 +875,8 @@ int USM::add_usm_user(const OctetStr& user_name,
 }
 
 int USM::add_usm_user(const OctetStr& security_name,
-		      const long int  auth_protocol,
-		      const long int  priv_protocol,
+		      const SmiINT32  auth_protocol,
+		      const SmiINT32  priv_protocol,
 		      const OctetStr& auth_password,
 		      const OctetStr& priv_password)
 {
@@ -1288,12 +1288,12 @@ DLLOPT void USM::add_user_added_callback(const usm_add_user_callback cb)
 }
 
 int USM::get_time(const OctetStr &engine_id,
-		  long int *engine_boots, long int *engine_time)
+		  SmiINT32 *engine_boots, SmiINT32 *engine_time)
 {
   return usm_time_table->get_time(engine_id, *engine_boots, *engine_time);
 }
 
-int USM::get_local_time(long int *engine_boots, long int *engine_time) const
+int USM::get_local_time(SmiINT32 *engine_boots, SmiINT32 *engine_time) const
 {
   return usm_time_table->get_local_time(*engine_boots, *engine_time);
 }
@@ -1886,7 +1886,7 @@ int USM::process_msg(
             unsigned char *securityParameters,// for the received message
             int securityParametersLength,
             int securityParametersPosition,
-            long int securityLevel,           // Level of Security
+            SmiINT32 securityLevel,           // Level of Security
             unsigned char *wholeMsg,          // as received on the wire
             int wholeMsgLength,               // length as received on the wire
             unsigned char *msgData,
@@ -1905,7 +1905,7 @@ int USM::process_msg(
   unsigned char* sp = securityParameters;
   int spLength = securityParametersLength;
   unsigned char type = 0;
-  long int engineBoots = 0, engineTime = 0;
+  SmiINT32 engineBoots = 0, engineTime = 0;
   unsigned char authParam[SNMPv3_AP_MAXLENGTH_AUTHPARAM];
   unsigned char privParam[SNMPv3_AP_MAXLENGTH_PRIVPARAM];
   int authParamLength = SNMPv3_AP_MAXLENGTH_AUTHPARAM;
@@ -2373,7 +2373,7 @@ unsigned char *USM::build_whole_msg(
     return NULL;
   secParLength = SAFE_INT_CAST(secParPtr - secPar.get_ptr());
 
-  long int dummyVersion = 3;
+  SmiINT32 dummyVersion = 3;
   debugprintf(3, "Coding int snmpVersion = 0x%lx",dummyVersion);
   bufPtr = asn_build_int(bufPtr, &length, ASN_UNI_PRIM | ASN_INTEGER,
                          &dummyVersion);
@@ -2593,8 +2593,8 @@ USMTimeTable::~USMTimeTable()
 }
 
 int USMTimeTable::add_entry(const OctetStr &engine_id,
-                            const long int engine_boots,
-                            const long int engine_time)
+                            const SmiINT32 engine_boots,
+                            const SmiINT32 engine_time)
 {
   if (!table)
     return SNMPv3_USM_ERROR;
@@ -2683,8 +2683,8 @@ unsigned long USMTimeTable::get_local_time()
   return table[0].time_diff + SAFE_ULONG_CAST(now);
 }
 
-int USMTimeTable::get_local_time(long int &engine_boots,
-                                 long int &engine_time)
+int USMTimeTable::get_local_time(SmiINT32 &engine_boots,
+                                 SmiINT32 &engine_time)
 {
   if (!table)
     return SNMPv3_USM_ERROR;
@@ -2707,7 +2707,7 @@ int USMTimeTable::get_local_time(long int &engine_boots,
 }
 
 int USMTimeTable::get_time(const OctetStr &engine_id,
-                           long int &engine_boots, long int &engine_time)
+                           SmiINT32 &engine_boots, SmiINT32 &engine_time)
 {
   if (!table)
     return SNMPv3_USM_ERROR;
@@ -2748,8 +2748,8 @@ int USMTimeTable::get_time(const OctetStr &engine_id,
 }
 
 int USMTimeTable::check_time(const OctetStr &engine_id,
-                             const long int engine_boots,
-                             const long int engine_time)
+                             const SmiINT32 engine_boots,
+                             const SmiINT32 engine_time)
 
 {
   if (!table)
@@ -2908,8 +2908,8 @@ USMUserNameTable::~USMUserNameTable()
 
 int USMUserNameTable::add_entry(const OctetStr& user_name,
                                 const OctetStr& security_name,
-                                const long int  auth_proto,
-                                const long int  priv_proto,
+                                const SmiINT32  auth_proto,
+                                const SmiINT32  priv_proto,
                                 const OctetStr& auth_pass,
                                 const OctetStr& priv_pass)
 {
@@ -3751,8 +3751,8 @@ const struct UsmUserTableEntry *USMUserTable::get_entry(const OctetStr &sec_name
 int USMUserTable::add_entry(
                       const OctetStr &engine_id,
 		      const OctetStr &user_name,  const OctetStr &sec_name,
-		      const long int  auth_proto, const OctetStr &auth_key,
-		      const long int  priv_proto, const OctetStr &priv_key)
+		      const SmiINT32 auth_proto, const OctetStr &auth_key,
+		      const SmiINT32 priv_proto, const OctetStr &priv_key)
 {
   LOG_BEGIN(loggerModuleName, INFO_LOG | 7);
   LOG("USMUserTable: Adding user (user name) (engine id) (auth) (priv)");

@@ -898,8 +898,8 @@ int v3MP::snmp_parse(Snmp *snmp_session,
                      OctetStr &securityName,
                      OctetStr &contextEngineID,
                      OctetStr &contextName,
-                     long     &securityLevel,
-                     long     &msgSecurityModel,
+                     SmiINT32     &securityLevel,
+                     SmiINT32     &msgSecurityModel,
                      snmp_version &spp_version,
                      UdpAddress from_address)
 {
@@ -910,10 +910,10 @@ int v3MP::snmp_parse(Snmp *snmp_session,
     return  SNMPv3_MP_ERROR;
 
   unsigned char type = 0;
-  long version = 0;
+  SmiINT32 version = 0;
   int origLength = inBufLength;
   unsigned char *inBufPtr = inBuf;
-  long msgID = 0, msgMaxSize = 0;
+  SmiINT32 msgID = 0, msgMaxSize = 0;
   unsigned char msgFlags = 0;
   Buffer<unsigned char> msgSecurityParameters(MAX_SNMP_PACKET);
   Buffer<unsigned char> msgData(MAX_SNMP_PACKET);
@@ -1264,7 +1264,7 @@ int v3MP::snmp_parse(Snmp *snmp_session,
 bool v3MP::is_v3_msg(unsigned char *buffer, int length)
 {
   unsigned char type = 0;
-  long version = 0;
+  SmiINT32 version = 0;
 
   // get the type
   buffer = asn_parse_header(buffer, &length, &type);

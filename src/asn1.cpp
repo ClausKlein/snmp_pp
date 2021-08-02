@@ -76,7 +76,7 @@ static const char *loggerModuleName = "snmp++.asn1";
 unsigned char *asn_parse_int(unsigned char *data,
 			     int *datalength,
 			     unsigned char *type,
-			     long *intp)
+			     SmiINT32 *intp)
 {
   /*
    * ASN.1 integer ::= 0x02 asnlength byte {byte}*
@@ -128,7 +128,7 @@ unsigned char *asn_parse_int(unsigned char *data,
 unsigned char *asn_parse_unsigned_int(unsigned char *data,	
                                       int *datalength,
                                       unsigned char *type,
-                                      unsigned long *intp)
+                                      SmiINT32 *intp)
 {
   /*
    * ASN.1 integer ::= 0x02 asnlength byte {byte}*
@@ -197,7 +197,7 @@ unsigned char *asn_parse_unsigned_int(unsigned char *data,
  */
 unsigned char *asn_build_int(unsigned char *data, int *datalength,
                              const unsigned char type,
-                             const long *intp)
+                             const SmiINT32 *intp)
 {
   /*
    * ASN.1 integer ::= 0x02 asnlength byte {byte}*
@@ -245,7 +245,7 @@ unsigned char *asn_build_int(unsigned char *data, int *datalength,
 unsigned char *asn_build_unsigned_int(unsigned char *data, // modified data
                                       int *datalength,     // returned buffer length
                                       unsigned char type,  // SMI type
-                                      unsigned long *intp) // Uint to encode
+                                      SmiUINT32 *intp) // Uint to encode
 {
   /*
    * ASN.1 integer ::= 0x02 asnlength byte {byte}*
@@ -1150,27 +1150,27 @@ void snmp_add_var(struct snmp_pdu *pdu,
     case sNMP_SYNTAX_GAUGE32:
       //    case sNMP_SYNTAX_UINT32:
       {
-	long templong = 0;
+	SmiINT32 templong = 0;
 	vars->type = (unsigned char) smival->syntax;
-	vars->val.integer = (long *)malloc(sizeof(long));
-	vars->val_len = sizeof(long);
-	templong = (long) smival->value.uNumber;
-	memcpy((long*) vars->val.integer,
-		(long*) &templong,
-		sizeof(long));
+	vars->val.integer = (SmiINT32 *)malloc(sizeof(SmiINT32));
+	vars->val_len = sizeof(SmiINT32);
+	templong = (SmiINT32) smival->value.uNumber;
+	memcpy((SmiINT32*) vars->val.integer,
+		(SmiINT32*) &templong,
+		sizeof(SmiINT32));
       }
       break;
 
     case sNMP_SYNTAX_INT32:
       {
-	long templong = 0;
+	SmiINT32 templong = 0;
 	vars->type = (unsigned char) smival->syntax;
-	vars->val.integer = (long *)malloc(sizeof(long));
-	vars->val_len = sizeof(long);
-	templong = (long) smival->value.sNumber;
-	memcpy((long*) vars->val.integer,
-		(long*) &templong,
-		sizeof(long));
+	vars->val.integer = (SmiINT32 *)malloc(sizeof(SmiINT32));
+	vars->val_len = sizeof(SmiINT32);
+	templong = (SmiINT32) smival->value.sNumber;
+	memcpy((SmiINT32*) vars->val.integer,
+		(SmiINT32*) &templong,
+		sizeof(SmiINT32));
       }
       break;
 
@@ -1193,7 +1193,7 @@ void snmp_add_var(struct snmp_pdu *pdu,
 // build the authentication, works for v1 or v2c
 static unsigned char *snmp_auth_build(unsigned char *data,
 				      int *length,
-				      const long int version,
+				      const SmiINT32 version,
 				      const unsigned char *community,
 				      const int community_len,
 				      const int messagelen)
@@ -1248,26 +1248,26 @@ unsigned char * snmp_build_var_op(unsigned char *data,
   // based on the type...
   switch(var_val_type) {
   case ASN_INTEGER:
-    if (var_val_len != sizeof(long))
+    if (var_val_len != sizeof(SmiINT32))
     {
       ASNERROR("build_var_op: Illegal size of integer");
       return NULL;
     }
     buffer_pos = asn_build_int(buffer_pos, &bufferLen,
-                               var_val_type, (long *)var_val);
+                               var_val_type, (SmiINT32 *)var_val);
     break;
 
   case SMI_GAUGE:
   case SMI_COUNTER:
   case SMI_TIMETICKS:
   case SMI_UINTEGER:
-    if (var_val_len != sizeof(unsigned long))
+    if (var_val_len != sizeof(SmiUINT32))
     {
       ASNERROR("build_var_op: Illegal size of unsigned integer");
       return NULL;
     }
     buffer_pos = asn_build_unsigned_int(buffer_pos, &bufferLen,
-                                        var_val_type, (unsigned long *)var_val);
+                                        var_val_type, (SmiUINT32 *)var_val);
     break;
 
   case SMI_COUNTER64:
@@ -1406,7 +1406,7 @@ unsigned char *build_data_pdu(struct snmp_pdu *pdu,
 			  sizeof(pdu->agent_addr.sin_addr.s_addr));
     if (cp == NULL) return 0;
 
-    long dummy = pdu->trap_type;
+    SmiINT32 dummy = pdu->trap_type;
     // generic trap
     cp = asn_build_int(cp, &length, ASN_UNI_PRIM | ASN_INTEGER, &dummy);
     if (cp == NULL) return 0;
@@ -1443,7 +1443,7 @@ unsigned char *build_data_pdu(struct snmp_pdu *pdu,
 // serialize the pdu
 int snmp_build(struct snmp_pdu	*pdu,
                unsigned char *packet,          int *out_length,
-               const long version,
+               const snmp_version version,
                const unsigned char* community, const int community_len)
 {
   Buffer<unsigned char> buf(MAX_SNMP_PACKET);
@@ -1486,7 +1486,7 @@ static unsigned char *snmp_auth_parse(unsigned char *data,
 				      int *length,
 				      unsigned char *community,
 				      int *community_len,
-				      long	*version)
+				      SmiINT32	*version)
 {
   unsigned char type = 0;
 
@@ -1602,8 +1602,8 @@ int snmp_parse_vb(struct snmp_pdu *pdu, unsigned char *&data, int &data_len)
     len = MAX_SNMP_PACKET;
     switch((short)vp->type) {
     case ASN_INTEGER:
-      vp->val.integer = (long *)malloc(sizeof(long));
-      vp->val_len = sizeof(long);
+      vp->val.integer = (SmiINT32 *)malloc(sizeof(SmiINT32));
+      vp->val_len = sizeof(SmiINT32);
       asn_parse_int(var_val, &len, &vp->type, vp->val.integer);
       break;
 
@@ -1611,8 +1611,8 @@ int snmp_parse_vb(struct snmp_pdu *pdu, unsigned char *&data, int &data_len)
     case SMI_GAUGE:
     case SMI_TIMETICKS:
     case SMI_UINTEGER:
-      vp->val.integer = (long *)malloc(sizeof(long));
-      vp->val_len = sizeof(long);
+      vp->val.integer = (SmiINT32 *)malloc(sizeof(SmiINT32));
+      vp->val_len = sizeof(SmiINT32);
       asn_parse_unsigned_int(var_val, &len, &vp->type, vp->val.integer);
       break;
 
@@ -1701,7 +1701,7 @@ int snmp_parse_data_pdu(snmp_pdu *pdu, unsigned char *&data, int &length)
     if (data == NULL) return SNMP_CLASS_ASN1ERROR;
 
     // get trap type
-    long dummy = 0;
+    SmiINT32 dummy = 0;
     data = asn_parse_int(data, &length, &type, &dummy);
     pdu->trap_type = dummy;
 
@@ -1728,7 +1728,7 @@ int snmp_parse(struct snmp_pdu *pdu,
 		int &community_len,
 		snmp_version &spp_version)
 {
-  long    version = -1;
+  SmiINT32 version = -1;
 
   // authenticates message and returns length if valid
   data = snmp_auth_parse(data, &data_length,
@@ -1755,9 +1755,9 @@ int snmp_parse(struct snmp_pdu *pdu,
 #ifdef _SNMPv3
 // Parse the field HeaderData of a SNMPv3 message and return the values.
 unsigned char *asn1_parse_header_data(unsigned char *buf, int *buf_len,
-				      long *msg_id, long *msg_max_size,
+				      SmiINT32 *msg_id, SmiINT32 *msg_max_size,
 				      unsigned char *msg_flags,
-				      long *msg_security_model)
+				      SmiINT32 *msg_security_model)
 {
   unsigned char *buf_ptr = buf;
   int length = *buf_len;
@@ -1816,10 +1816,10 @@ unsigned char *asn1_parse_header_data(unsigned char *buf, int *buf_len,
 
 // Encode the given values for the HeaderData into the buffer.
 unsigned char *asn1_build_header_data(unsigned char *outBuf, int *maxLength,
-				       long msgID,
-				       long maxMessageSize,
+				       SmiINT32 msgID,
+				       SmiINT32 maxMessageSize,
 				       unsigned char msgFlags,
-				       long securityModel)
+				       SmiINT32 securityModel)
 
 {
   unsigned char buf[MAXLENGTH_GLOBALDATA];
