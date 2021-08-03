@@ -292,7 +292,7 @@ CSNMPMessageQueue::CSNMPMessageQueue(EventListHolder *holder, Snmp *session)
 CSNMPMessageQueue::~CSNMPMessageQueue()
 {
   CSNMPMessageQueueElt *leftOver = nullptr;
-  lock();
+  lock(); // FIXME: not exception save! CK
     /*--------------------------------------------------------*/
     /* walk the list deleting any elements still on the queue */
     /*--------------------------------------------------------*/
@@ -301,7 +301,7 @@ CSNMPMessageQueue::~CSNMPMessageQueue()
     if (leftOver->GetMessage()->IsLocked())
     {
       unlock();
-      // TODO: should we sleep here
+      // TODO: should we sleep here?
       lock();
     }
     else
@@ -332,7 +332,7 @@ CSNMPMessage * CSNMPMessageQueue::AddEntry(unsigned long id,
                                           rawPdu, rawPduLen, address,
                                           callBack, callData);
 
-  lock();
+  lock(); // FIXME: not exception save! CK
     /*---------------------------------------------------------*/
     /* Insert entry at head of list, done automagically by the */
     /* constructor function, so don't use the return value.    */
@@ -412,7 +412,7 @@ int CSNMPMessageQueue::DeleteEntry(const unsigned long uniqueId)
 
 void CSNMPMessageQueue::DeleteSocketEntry(const SnmpSocket socket)
 {
-  lock();
+  lock(); // FIXME: not exception save! CK
   CSNMPMessageQueueElt *msgEltPtr = m_head.GetNext();
   while (msgEltPtr)
   {
@@ -710,13 +710,13 @@ int CSNMPMessageQueue::HandleEvents(const int maxfds,
       do
       {
         redoGetEntry = false;
-        lock();
+        lock(); // FIXME: not exception save! CK
         // find the corresponding msg in the message queue
         msg = GetEntry(temp_req_id);
         if (msg && msg->IsLocked())
         {
           unlock();
-          // TODO: Should we sleep here?
+          // TODO: should we sleep here?
           redoGetEntry = true;
         }
       } while (redoGetEntry);
@@ -796,7 +796,7 @@ int CSNMPMessageQueue::DoRetries(const msec &now)
   CSNMPMessage *msg = nullptr;
   msec sendTime(0, 0);
   int status = SNMP_CLASS_SUCCESS;
-  lock();
+  lock(); // FIXME: not exception save! CK
   while ((msg = GetNextTimeoutEntry()))
   {
     msg->GetSendTime(sendTime);

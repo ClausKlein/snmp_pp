@@ -71,7 +71,7 @@
 # include <string> // std::stoi() used
 #else
 # ifdef HAVE_STDIO_H
-#  include <stdio.h>
+#   include <stdio.h>
 # endif
 # ifdef CNF_STDC_HEADERS
 #  include <stdlib.h>
@@ -104,7 +104,7 @@
 # endif
 # ifdef CNF_HAVE_TIME_H
 #  include <time.h>
-#endif
+# endif
 #endif
 
 #cmakedefine CNF_HAVE_UNISTD_H

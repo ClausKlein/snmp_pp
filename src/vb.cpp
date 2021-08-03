@@ -376,7 +376,7 @@ const char *Vb::get_printable_value() const
 
 int Vb::get_asn1_length() const
 {
-  // Header for vbs is always 4 Bytes! FIXME
+  // FIXME: Header for vbs is always 4 Bytes!
   if (iv_vb_value)
     return iv_vb_oid.get_asn1_length() + iv_vb_value->get_asn1_length() + 4;
 

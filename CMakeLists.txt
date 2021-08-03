@@ -109,7 +109,7 @@ check_function_exists("gethostbyname" HAVE_GETHOSTBYNAME)
 check_function_exists("gethostbyname2" HAVE_GETHOSTBYNAME2)
 check_function_exists("gethostbyname_r" HAVE_GETHOSTBYNAME_R)
 check_function_exists("gethostname" HAVE_GETHOSTNAME)
-check_function_exists("getpid" HAVE_GETPID) # again?
+#check_function_exists("getpid" HAVE_GETPID) # again?
 check_function_exists("gettimeofday" HAVE_GETTIMEOFDAY)
 check_function_exists("htonl" HAVE_HTONL)
 check_function_exists("inet_aton" HAVE_INET_ATON)
@@ -118,42 +118,43 @@ check_function_exists("inet_ntop" HAVE_INET_NTOP)
 check_function_exists("inet_pton" HAVE_INET_PTON)
 check_function_exists("isdigit" HAVE_ISDIGIT)
 check_function_exists("localtime_r" HAVE_LOCALTIME_R)
+check_include_files(malloc.h HAVE_MALLOC_H)
 check_function_exists("malloc" HAVE_MALLOC)
 check_function_exists("memset" HAVE_MEMSET)
 check_function_exists("poll" HAVE_POLL)
 check_function_exists("realloc" HAVE_REALLOC)
 check_function_exists("select" HAVE_SELECT)
 check_function_exists("socket" HAVE_SOCKET)
-check_function_exists("strcasecmp" HAVE_STRCASECMP) # again
+#check_function_exists("strcasecmp" HAVE_STRCASECMP) # again
 check_function_exists("strchr" HAVE_STRCHR)
 check_function_exists("strerror" HAVE_STRERROR)
-check_function_exists("stricmp" HAVE_STRICMP) # again?
+#check_function_exists("stricmp" HAVE_STRICMP) # again?
 check_function_exists("strstr" HAVE_STRSTR)
-check_include_files(inttypes.h HAVE_INTTYPES_H) # again?
-check_include_files(io.h HAVE_IO_H) # again?
-check_include_files(limits.h HAVE_LIMITS_H)
-check_include_files(memory.h HAVE_MEMORY_H) # again?
-check_include_files(netdb.h HAVE_NETDB_H) # again?
-check_include_files(netinet/in.h HAVE_NETINET_IN_H) # again?
-check_include_files(poll.h HAVE_POLL_H) # again?
-check_include_files(process.h HAVE_PROCESS_H) # again?
-check_include_files(pthread.h HAVE_PTHREAD) # again?
-check_include_files(signal.h HAVE_SIGNAL_H) # again?
-check_include_files(stdint.h HAVE_STDINT_H) # again?
-check_include_files(stdio.h HAVE_STDIO_H)
-check_include_files(stdlib.h HAVE_STDLIB_H) # again?
-check_include_files(string.h HAVE_STRING_H) # again?
-check_include_files(strings.h HAVE_STRINGS_H) # again?
-check_include_files(sys/param.h HAVE_SYS_PARAM_H) # again?
-check_include_files(sys/select.h HAVE_SYS_SELECT_H) # again?
-check_include_files(sys/socket.h HAVE_SYS_SOCKET_H) # again?
-check_include_files(sys/stat.h HAVE_SYS_STAT_H) # again?
-check_include_files(sys/time.h HAVE_SYS_TIME_H) # again?
-check_include_files(sys/timeb.h HAVE_SYS_TIMEB_H) # again?
-check_include_files(sys/types.h HAVE_SYS_TYPES_H) # again?
-check_include_files(sys/unistd.h HAVE_SYS_UNISTD_H) # again?
-check_include_files(time.h HAVE_TIME_H) # again?
-check_include_files(unistd.h HAVE_UNISTD_H) # again?
+#check_include_files(inttypes.h HAVE_INTTYPES_H) # again?
+#check_include_files(io.h HAVE_IO_H) # again?
+#check_include_files(limits.h HAVE_LIMITS_H)
+#check_include_files(memory.h HAVE_MEMORY_H) # again?
+#check_include_files(netdb.h HAVE_NETDB_H) # again?
+#check_include_files(netinet/in.h HAVE_NETINET_IN_H) # again?
+#check_include_files(poll.h HAVE_POLL_H) # again?
+#check_include_files(process.h HAVE_PROCESS_H) # again?
+#check_include_files(pthread.h HAVE_PTHREAD) # again?
+#check_include_files(signal.h HAVE_SIGNAL_H) # again?
+#check_include_files(stdint.h HAVE_STDINT_H) # again?
+#check_include_files(stdio.h HAVE_STDIO_H)
+#check_include_files(stdlib.h HAVE_STDLIB_H) # again?
+#check_include_files(string.h HAVE_STRING_H) # again?
+#check_include_files(strings.h HAVE_STRINGS_H) # again?
+#check_include_files(sys/param.h HAVE_SYS_PARAM_H) # again?
+#check_include_files(sys/select.h HAVE_SYS_SELECT_H) # again?
+#check_include_files(sys/socket.h HAVE_SYS_SOCKET_H) # again?
+#check_include_files(sys/stat.h HAVE_SYS_STAT_H) # again?
+#check_include_files(sys/time.h HAVE_SYS_TIME_H) # again?
+#check_include_files(sys/timeb.h HAVE_SYS_TIMEB_H) # again?
+#check_include_files(sys/types.h HAVE_SYS_TYPES_H) # again?
+#check_include_files(sys/unistd.h HAVE_SYS_UNISTD_H) # again?
+#check_include_files(time.h HAVE_TIME_H) # again?
+#check_include_files(unistd.h HAVE_UNISTD_H) # again?
 
 if(MSVC)
   check_include_files(winsock2.h HAVE_WINSOCK2_H) # again?
@@ -384,8 +385,7 @@ if(NOT HAVE_SIZE_T)
   endif("${CMAKE_SIZEOF_VOID_P}" EQUAL 8)
 endif()
 
-check_include_files(malloc.h HAVE_MALLOC_H)
-check_include_files("sys/param.h;sys/mount.h" HAVE_SYS_MOUNT_H)
+check_include_files("sys/mount.h" HAVE_SYS_MOUNT_H)
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/cmake_config.h.in config.h)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/cmake_libsnmp.h.in libsnmp.h)
@@ -540,9 +540,9 @@ if(SNMP_PP_EXAMPLES)
     string(REPLACE "consoleExamples/" "" examplename ${examplename})
     add_executable(${examplename} ${examplesourcefile})
     target_link_libraries(${examplename} ${PROJECT_NAME})
-    target_include_directories(
-      ${examplename} SYSTEM BEFORE PRIVATE ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/include
-    )
+    #    target_include_directories(
+    #      ${examplename} SYSTEM BEFORE PRIVATE ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/include
+    #    )
   endforeach()
 
   enable_testing()
