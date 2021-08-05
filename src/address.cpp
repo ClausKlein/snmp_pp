@@ -523,7 +523,7 @@ int IpAddress::parse_dotted_ipstring(const char* inaddr)
     // XXX.XXX.XXX.XXX
     if (!inaddr || (strlen(inaddr) >= sizeof(temp))) return false;
 
-    strncpy(temp, inaddr, sizeof(temp));
+    strlcpy(temp, inaddr, sizeof(temp));
     trim_white_space(temp);
     if (strlen(temp) > 15) return false;
 
@@ -603,7 +603,7 @@ int IpAddress::parse_coloned_ipstring(const char* inaddr)
     // 123456789012345678901234567890123456789
     // 1BCD:2BCD:3BCD:4BCD:5BCD:6BCD:7BCD:8BCD%4123456789
     if (!inaddr || (strlen(inaddr) >= sizeof(temp))) return false;
-    strncpy(temp, inaddr, sizeof(temp));
+    strlcpy(temp, inaddr, sizeof(temp));
     trim_white_space(temp);
 
     // first check for ipv6 scope
@@ -1055,7 +1055,7 @@ int IpAddress::addr_to_friendly()
     int             error = 0;
     char            ds[MAX_FRIENDLY_NAME];
 
-    strncpy(ds, this->IpAddress::get_printable(), sizeof(ds));
+    strlcpy(ds, this->IpAddress::get_printable(), sizeof(ds));
     memset(&hints, 0, sizeof(hints));
     hints.ai_flags = AI_CANONNAME;
 #    ifdef AI_ADDRCONFIG
@@ -1650,7 +1650,7 @@ bool UdpAddress::parse_address(const char* inaddr)
 
     if (inaddr && (strlen(inaddr) < MAX_FRIENDLY_NAME))
     {
-        strncpy(buffer, inaddr, sizeof(buffer));
+        strlcpy(buffer, inaddr, sizeof(buffer));
         trim_white_space(buffer);
     }
     else

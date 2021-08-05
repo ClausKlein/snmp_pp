@@ -178,7 +178,7 @@ int v3MP::EngineIdTable::get_entry(
     if (hostport.len() >= MAX_HOST_NAME_LENGTH) return SNMPv3_MP_ERROR;
 
     /* split up port from hostport */
-    strncpy(host, hostport.get_printable(), sizeof(host));
+    strlcpy(host, hostport.get_printable(), sizeof(host));
 
     ptr = strstr((char*)host, "/");
     if (!ptr) return SNMPv3_MP_ERROR;
