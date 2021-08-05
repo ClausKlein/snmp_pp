@@ -604,7 +604,7 @@ int CSNMPMessageQueue::HandleEvents(const struct pollfd *readfds,
       if (status)
       {
         // received pdu does not match
-        // @todo if version is SNMPv3 we must return a report
+        // TODO: if version is SNMPv3 we must return a report
         //       unknown pdu handler!
         unlock();
         continue;
@@ -738,7 +738,7 @@ int CSNMPMessageQueue::HandleEvents(const int maxfds,
       if (status)
       {
         // received pdu does not match
-        // @todo if version is SNMPv3 we must return a report
+        // TODO: if version is SNMPv3 we must return a report
         //       unknown pdu handler!
         unlock();
         continue;

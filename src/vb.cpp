@@ -200,7 +200,7 @@ int Vb::get_value(pp_uint64 &i) const
   return SNMP_CLASS_INVALID;
 }
 
-//--------------[ Vb::get_value(unsigned char WINFAR * ptr, unsigned long &len)
+//--------------[ Vb::get_value(unsigned char * ptr, unsigned long &len)
 // get a unsigned char string value
 // destructive, copies into given ptr
 // also returned is the length
@@ -271,7 +271,7 @@ int Vb::get_value(SnmpSyntax &val) const
   return SNMP_CLASS_INVALID;
 }
 
-//--------------[ Vb::get_value(char WINFAR *ptr) ]-------------------
+//--------------[ Vb::get_value(char  *ptr) ]-------------------
 // get a char * from an octet string
 // the user must provide space or
 // memory will be stepped on

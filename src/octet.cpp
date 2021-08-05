@@ -687,7 +687,7 @@ const char *OctetStr::get_printable_hex() const
   {
     cnt	     = 16;	  /* print 16 bytes per line */
     buf_ptr  = char_buf;
-    sprintf(line_ptr, "  ");
+    snprintf(line_ptr, sizeof(output_buffer), "  ");
     line_ptr += 2;  /* indent */
 
     /*-----------------------*/
@@ -695,7 +695,7 @@ const char *OctetStr::get_printable_hex() const
     /*-----------------------*/
     while (cnt-- > 0 && local_len-- > 0)
     {
-      sprintf(line_ptr, "%2.2X ", *bytes);
+      snprintf(line_ptr, sizeof(output_buffer), "%2.2X ", *bytes);
 
       line_ptr +=3;   /* the display of a byte always 3 chars long */
       if (isprint(*bytes))
@@ -724,7 +724,7 @@ const char *OctetStr::get_printable_hex() const
     if (hex_output_type == OutputHex)
       char_buf[0] = 0;
 
-    sprintf(line_ptr,"   %s%s", char_buf, linefeed_chars);
+    snprintf(line_ptr, sizeof(output_buffer),"   %s%s", char_buf, linefeed_chars);
     line_ptr += 3 + strlen(char_buf) + strlen(linefeed_chars);
   }
 

@@ -61,14 +61,13 @@ void debughexcprintf(int db_level, const char* comment,
 
     if (comment && (strlen(comment) < MAX_LOG_SIZE - 25))
     {
-        sprintf(buf, "%s (length %u): ", comment, len);
+        snprintf(buf, MAX_LOG_SIZE, "%s (length %u): ", comment, len);
         LOG_BEGIN(loggerModuleName, DEBUG_LOG | 3);
         LOG(buf);
         LOG_END;
     }
 
-    char* tmp = new char[4];
-
+    char* tmp = new char[4]; // FIXME: why on heap? CK
     if (NULL == tmp)
     {
         delete[] buf;
@@ -78,13 +77,13 @@ void debughexcprintf(int db_level, const char* comment,
     buf[0] = '\0';
     for (unsigned int i = 0; i < len; i++)
     {
-        sprintf(tmp, "%02X ", data[i]);
-        strcat(buf, tmp);
+        sprintf(tmp, "%02X ", data[i]); // FIXME: use snprintf()! CK
+        strlcat(buf, tmp, MAX_LOG_SIZE);
 
         if ((i + 1) % 4 == 0)
         {
-            sprintf(tmp, " ");
-            strcat(buf, tmp);
+            sprintf(tmp, " "); // FIXME: use snprintf()! CK
+            strlcat(buf, tmp, MAX_LOG_SIZE);
         }
 
         if ((i + 1) % 16 == 0)
@@ -300,7 +299,7 @@ int saveBootCounter(
     FILE *file_in = nullptr, *file_out = nullptr;
 
     tmpFileName[0] = 0;
-    sprintf(tmpFileName, "%s.tmp", fileName);
+    snprintf(tmpFileName, sizeof(tmpFileName), "%s.tmp", fileName);
     if (len > MAXLENGTH_ENGINEID)
     {
         LOG_BEGIN(loggerModuleName, ERROR_LOG | 3);
@@ -374,7 +373,7 @@ int saveBootCounter(
 
                     continue;
                 }
-                sprintf(line, "%s%u\n", encoded, boot);
+                snprintf(line, sizeof(line), "%s%u\n", encoded, boot);
                 fputs(line, file_out);
                 found = true;
                 continue;
@@ -383,7 +382,7 @@ int saveBootCounter(
         }
         if (!found)
         {
-            sprintf(line, "%s%u\n", encoded, boot);
+            snprintf(line, sizeof(line), "%s%u\n", encoded, boot);
             fputs(line, file_out);
         }
         fclose(file_in);

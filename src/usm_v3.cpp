@@ -3115,7 +3115,7 @@ int USMUserNameTable::save_to_file(const char* name, AuthPriv* ap)
     LOG(name);
     LOG_END;
 
-    sprintf(tmp_file_name, "%s.tmp", name);
+    snprintf(tmp_file_name, sizeof(tmp_file_name), "%s.tmp", name);
     FILE* file_out = fopen(tmp_file_name, "w");
     if (!file_out)
     {
@@ -3199,7 +3199,7 @@ int USMUserNameTable::save_to_file(const char* name, AuthPriv* ap)
                     failed = true;
                     break;
                 }
-                sprintf(encoded, "%s\n", a->get_id_string());
+                snprintf(encoded, sizeof(encoded), "%s\n", a->get_id_string());
                 if (fwrite(
                         encoded, strlen(a->get_id_string()) + 1, 1, file_out)
                     != 1)
@@ -3225,7 +3225,7 @@ int USMUserNameTable::save_to_file(const char* name, AuthPriv* ap)
                     failed = true;
                     break;
                 }
-                sprintf(encoded, "%s\n", p->get_id_string());
+                snprintf(encoded, sizeof(encoded), "%s\n", p->get_id_string());
                 if (fwrite(
                         encoded, strlen(p->get_id_string()) + 1, 1, file_out)
                     != 1)
@@ -3902,7 +3902,7 @@ int USMUserTable::save_to_file(const char* name, AuthPriv* ap)
     LOG(name);
     LOG_END;
 
-    sprintf(tmp_file_name, "%s.tmp", name);
+    snprintf(tmp_file_name, sizeof(tmp_file_name), "%s.tmp", name);
     FILE* file_out = fopen(tmp_file_name, "w");
     if (!file_out)
     {
@@ -3998,7 +3998,7 @@ int USMUserTable::save_to_file(const char* name, AuthPriv* ap)
                     failed = true;
                     break;
                 }
-                sprintf(encoded, "%s\n", a->get_id_string());
+                snprintf(encoded, sizeof(encoded), "%s\n", a->get_id_string());
                 if (fwrite(
                         encoded, strlen(a->get_id_string()) + 1, 1, file_out)
                     != 1)
@@ -4024,7 +4024,7 @@ int USMUserTable::save_to_file(const char* name, AuthPriv* ap)
                     failed = true;
                     break;
                 }
-                sprintf(encoded, "%s\n", p->get_id_string());
+                snprintf(encoded, sizeof(encoded), "%s\n", p->get_id_string());
                 if (fwrite(
                         encoded, strlen(p->get_id_string()) + 1, 1, file_out)
                     != 1)
