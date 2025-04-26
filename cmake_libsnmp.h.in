@@ -158,6 +158,7 @@ extern "C" int strcasecmp(const char *s1, const char *s2);
 
 namespace {
 
+#ifndef HAVE_STRLCPY
 // see https://www.freebsd.org/cgi/man.cgi?query=strlcat&sektion=3
 // and
 // https://us-cert.cisa.gov/bsi/articles/knowledge/coding-practices/strncpy-and-strncat
@@ -169,7 +170,9 @@ inline size_t strlcpy(char* dst, const char* src, size_t capacity)
     assert(dst != nullptr);
     return snprintf(dst, capacity, "%s", src);
 }
+#endif
 
+#ifndef HAVE_STRLCAT
 /// If the return value is >= capacity, the output string has been
 /// truncated.  It is the caller's responsibility to handle this
 inline size_t strlcat(char* dst, const char* src, size_t capacity)
@@ -184,6 +187,7 @@ inline size_t strlcat(char* dst, const char* src, size_t capacity)
 
     return actual_used + strlen(src); // NOTE: total_len
 }
+#endif
 
 } // namespace
 #endif

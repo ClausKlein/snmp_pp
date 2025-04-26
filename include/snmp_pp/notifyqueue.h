@@ -151,7 +151,7 @@ public:
     int DoRetries(const msec& /*sendtime*/) override
     {
         return 0;
-    }                                 // nothing to retry
+    } // nothing to retry
 
     int Done() override { return 0; } // we are never done
 

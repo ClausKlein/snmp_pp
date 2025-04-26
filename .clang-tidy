@@ -1,8 +1,12 @@
 ---
 Checks: "-*,\
 boost-*,\
+bugprone,\
+-bugprone-implicit-widening-of-multiplication-result,\
+-bugprone-easily-swappable-parameters,\
+-bugprone-narrowing-conversions,\
+bugprone-macro-parentheses,\
 bugprone-misplaced-widening-cast,\
-bugprone-implicit-widening-of-multiplication-result,\
 bugprone-suspicious-semicolon,\
 bugprone-unused-raii,\
 bugprone-unused-return-value,\
@@ -16,18 +20,16 @@ cert-*,\
 clang-analyzer-*,\
 -clang-analyzer-security.insecureAPI.*,\
 -cppcoreguidelines-*,\
-cppcoreguidelines-init-variables,\
 cppcoreguidelines-explicit-virtual-functions,\
+cppcoreguidelines-init-variables,\
 cppcoreguidelines-slicing,\
-cppcoreguidelines-pro-type-*,\
--cppcoreguidelines-pro-type-union-access,\
--cppcoreguidelines-pro-type-vararg,\
 -cppcoreguidelines-avoid-*,\
--cppcoreguidelines-special-*,\
 -cppcoreguidelines-macro-usage,\
--cppcoreguidelines-owning-memory,\
 -cppcoreguidelines-narrowing-conversions,\
-google-readability-casting,\
+-cppcoreguidelines-owning-memory,\
+-cppcoreguidelines-pro-type-*,\
+-cppcoreguidelines-special-*,\
+-google-readability-casting,\
 hicpp-*,\
 -hicpp-braces-around-statements,\
 -hicpp-explicit-conversions,\
@@ -39,11 +41,13 @@ hicpp-*,\
 -hicpp-vararg,\
 misc-*,\
 -misc-const-correctness,\
+-misc-include-cleaner,\
 -misc-non-private-member-variables-in-classes,\
 -misc-no-recursion,\
 -misc-unused-parameters,\
 -misc-unconventional-assign-operator,\
 -misc-use-anonymous-namespace,\
+-misc-use-internal-linkage,\
 modernize-*,\
 -modernize-macro-to-enum,\
 -modernize-use-default-member-init,\
@@ -51,6 +55,7 @@ modernize-*,\
 -modernize-use-trailing-return-type,\
 -modernize-use-using,\
 performance-*,\
+-performance-avoid-endl,\
 portability-*,\
 -readability-*,\
 -*magic-numbers,\
@@ -58,9 +63,8 @@ portability-*,\
 -*-no-array-decay,\
 -*-use-equals-default,\
 "
-WarningsAsErrors: ''
-HeaderFilterRegex: '.*'
-AnalyzeTemporaryDtors: false
+WarningsAsErrors: 'clang-*'
+HeaderFilterRegex: 'include/snmp_pp/.*'
 FormatStyle:     none
 User:            clausklein
 ...

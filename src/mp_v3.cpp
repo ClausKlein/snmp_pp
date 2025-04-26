@@ -826,9 +826,9 @@ int v3MP::send_report(unsigned char* scopedPDU, int scopedPDULength,
                 debugprintf(0, "mp: Error while trying to parse PDU!");
             }
         } // end of: if (data == NULL)
-    }     // end if (scopedPDULength != MAX_SNMP_PACKET)
+    } // end if (scopedPDULength != MAX_SNMP_PACKET)
     else
-    {     // scopedPDULength == MAX_SNMP_PACKET
+    { // scopedPDULength == MAX_SNMP_PACKET
         cEngineID[0]    = '\0';
         cEngineIDLength = 0;
         cName[0]        = '\0';

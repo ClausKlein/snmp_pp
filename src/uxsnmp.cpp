@@ -343,7 +343,7 @@ long Snmp::MyMakeReqId()
             current_rid = rid = PDU_MIN_RID;
             // let other tasks proceed
             eventListHolder->snmpEventList()->unlock();
-            struct timeval tv { };
+            struct timeval tv {};
             tv.tv_sec  = 0;
             tv.tv_usec = 100;
             select(0, nullptr, nullptr, nullptr, &tv);
@@ -375,13 +375,12 @@ DLLOPT int send_snmp_request(SnmpSocket sock, unsigned char* send_buf,
     if (((UdpAddress&)address).get_ip_version() == Address::version_ipv4)
     {
         // prepare the destination address
-        struct sockaddr_in agent_addr { }; // send socket struct
+        struct sockaddr_in agent_addr {}; // send socket struct
         memset(&agent_addr, 0, sizeof(agent_addr));
         agent_addr.sin_family      = AF_INET;
-        agent_addr.sin_addr.s_addr = inet_addr(
-            ((IpAddress&)address)
+        agent_addr.sin_addr.s_addr = inet_addr(((IpAddress&)address)
                 .IpAddress::get_printable()); // TODO: Use inet_pton()! CK
-        agent_addr.sin_port = htons(((UdpAddress&)address).get_port());
+        agent_addr.sin_port        = htons(((UdpAddress&)address).get_port());
 
         send_result = sendto(sock, (char*)send_buf, SAFE_INT_CAST(send_len), 0,
             (struct sockaddr*)&agent_addr, sizeof(agent_addr));
@@ -389,7 +388,7 @@ DLLOPT int send_snmp_request(SnmpSocket sock, unsigned char* send_buf,
     else
     {
 #ifdef SNMP_PP_IPv6
-        struct sockaddr_in6 agent_addr { };
+        struct sockaddr_in6 agent_addr {};
         memset(&agent_addr, 0, sizeof(agent_addr));
         unsigned int scope = 0;
 
@@ -774,7 +773,7 @@ void Snmp::map_action(unsigned short action, unsigned short& pdu_action)
         pdu_action = sNMP_PDU_GET; // TM ?? error ??
         break;
     }
-    }                              // end switch
+    } // end switch
 }
 
 //------[ Snmp Class Constructor ]--------------------------------------
@@ -938,7 +937,7 @@ void Snmp::init(int& status, IpAddress* addresses[2],
             // set up the manager socket attributes
             uint32_t const inaddr = inet_addr(
                 addresses[0]->get_printable()); // TODO: Use inet_pton()! CK
-            struct sockaddr_in mgr_addr { };
+            struct sockaddr_in mgr_addr {};
             memset(&mgr_addr, 0, sizeof(mgr_addr));
             mgr_addr.sin_family      = AF_INET;
             mgr_addr.sin_addr.s_addr = inaddr;
@@ -1071,7 +1070,7 @@ void Snmp::init(int& status, IpAddress* addresses[2],
             setCloseOnExecFlag(iv_snmp_session_ipv6);
 
             // set up the manager socket attributes
-            struct sockaddr_in6 mgr_addr { };
+            struct sockaddr_in6 mgr_addr {};
             memset(&mgr_addr, 0, sizeof(mgr_addr));
             unsigned int scope = 0;
 
@@ -1738,7 +1737,7 @@ void Snmp::check_notify_timestamp(Pdu& pdu)
 
         GetTime(&theTime); // This function must be defined by the application
 
-        timestamp       = theTime.NumMS / 10;
+        timestamp = theTime.NumMS / 10;
 #else
 #    ifdef HAVE_CLOCK_GETTIME
         struct timespec tsp = {};
@@ -2379,7 +2378,7 @@ int Snmp::engine_id_discovery(
     // now wait for the responses
     int            nfound = 0;
     msec           end_time;
-    struct timeval fd_timeout { };
+    struct timeval fd_timeout {};
 
     end_time += timeout_sec * 1000;
 
@@ -2546,7 +2545,7 @@ int Snmp::broadcast_discovery(UdpAddressCollection& addresses,
     // now wait for the responses
     int            nfound = 0;
     msec           end_time;
-    struct timeval fd_timeout { };
+    struct timeval fd_timeout {};
 
     end_time += timeout_sec * 1000;
 

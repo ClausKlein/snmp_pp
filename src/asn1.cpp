@@ -806,7 +806,7 @@ void asn_build_subid(uint32_t subid, unsigned char*& bp)
         int      bits     = 0;
         /* testmask *MUST* !!!! be of an unsigned type */
         for (testmask = 0x7F, testbits = 0; testmask != 0;
-             testmask <<= 7, testbits += 7)
+            testmask <<= 7, testbits += 7)
         {
             if (subid & testmask)
             { /* if any bits set */

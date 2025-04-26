@@ -86,7 +86,7 @@
 #    endif
 
 #    if !defined __CYGWIN32__ && !defined __hpux && !defined linux \
-        && !defined                                          _AIX
+        && !defined _AIX
 extern int h_errno; // defined in WinSock header, but not for UX?!
 #    endif
 #endif              // __unix

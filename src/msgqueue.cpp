@@ -834,7 +834,7 @@ int CSNMPMessageQueue::HandleEvents(const int maxfds, const fd_set& readfds,
             }
             unlock();
         } // if socket has data
-    }     // for all sockets
+    } // for all sockets
     return SNMP_CLASS_SUCCESS;
 }
 

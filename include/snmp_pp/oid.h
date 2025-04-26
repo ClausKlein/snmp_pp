@@ -636,7 +636,8 @@ public:
      *
      * @return Dotted oid string (for example "3.6.1.6")
      */
-    [[nodiscard]] const char* get_printable(const uint32_t start, const uint32_t n) const
+    [[nodiscard]] const char* get_printable(
+        const uint32_t start, const uint32_t n) const
     {
         return get_printable(start, n, (char*&)iv_part_str);
     }

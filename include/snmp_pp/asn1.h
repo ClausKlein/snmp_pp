@@ -79,8 +79,8 @@ typedef SmiUINT32 oid_t;
 #define ASN_EXTENSION_ID (0x1F)
 #define ASN_BIT8         (0x80)
 
-#define IS_CONSTRUCTOR(byte)  ((byte)&ASN_CONSTRUCTOR)
-#define IS_EXTENSION_ID(byte) (((byte)&ASN_EXTENSION_ID) == ASN_EXTENSION_ID)
+#define IS_CONSTRUCTOR(byte)  ((byte) & ASN_CONSTRUCTOR)
+#define IS_EXTENSION_ID(byte) (((byte) & ASN_EXTENSION_ID) == ASN_EXTENSION_ID)
 
 #define ASN_UNI_PRIM (ASN_UNIVERSAL | ASN_PRIMITIVE)
 #define ASN_SEQ_CON  (ASN_SEQUENCE | ASN_CONSTRUCTOR)

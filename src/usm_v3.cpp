@@ -1658,7 +1658,7 @@ int USM::generate_msg(unsigned char* globalData, // message header, admin data
     unsigned char*               wholeMsgPtr  = nullptr;
     int                          startAuthPar = 0;
     struct UsmUser*              user         = nullptr;
-    struct UsmSecurityParameters usmSecurityParams { };
+    struct UsmSecurityParameters usmSecurityParams {};
 
     int       bufLength   = 0;
     SmiUINT32 buf2Length  = buffer2.get_len();
@@ -1891,7 +1891,7 @@ int USM::generate_msg(unsigned char* globalData, // message header, admin data
             auth_priv->get_auth_params_len(user->authProtocol);
         usmSecurityParams.msgAuthenticationParameters =
             new unsigned char[usmSecurityParams
-                                  .msgAuthenticationParametersLength];
+                    .msgAuthenticationParametersLength];
         memset((char*)(usmSecurityParams.msgAuthenticationParameters), 0,
             usmSecurityParams.msgAuthenticationParametersLength);
 

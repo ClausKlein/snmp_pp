@@ -11,3 +11,4 @@ configure
 gcovr/
 include/snmp_pp/config_snmp_pp.h
 m4/
+build-*
