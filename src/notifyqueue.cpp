@@ -98,7 +98,7 @@ CNotifyEvent::CNotifyEvent(
     Snmp* snmp, const OidCollection& trapids, const TargetCollection& targets)
     : m_snmp(snmp)
 {
-    // create new collections using parms passed in
+    // create new collections using params passed in
     notify_ids     = new OidCollection(trapids);
     notify_targets = new TargetCollection(targets);
 }
@@ -891,7 +891,7 @@ int CNotifyEventQueue::HandleEvents(const int /*maxfds*/,
     Pdu         pdu;
     SnmpTarget* target = nullptr;
 
-    // pull the notifiaction off the socket
+    // pull the notification off the socket
     if (FD_ISSET(m_notify_fd, (fd_set*)&readfds))
     {
         status = receive_snmp_notification(

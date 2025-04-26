@@ -205,7 +205,7 @@ void* runable(void* data)
             }
         }
         ssync.unlock();
-        // last vb becomes seed of next rquest
+        // last vb becomes seed of next request
         pdu.set_vblist(&vb, 1);
     }
     if (status != SNMP_ERROR_NO_SUCH_NAME)

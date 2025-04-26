@@ -188,7 +188,7 @@ public:
     static void set_default_timeout(const uint32_t t) { default_timeout = t; }
 
     /**
-     * Change the default retries vlaue.
+     * Change the default retries value.
      *
      * Changing the default retries value will only have an effect for
      * target objects that are created after setting this value.
@@ -292,7 +292,7 @@ public:
     /**
      * Constructor with all args.
      *
-     * @param address - Address of the target host (cann be any address object)
+     * @param address - Address of the target host (can be any address object)
      * @param read_community_name - Community for get requests
      * @param write_community_name - Community for set requests
      */
@@ -302,7 +302,7 @@ public:
     /**
      * Constructor with all args.
      *
-     * @param address - Address of the target host (cann be any address object)
+     * @param address - Address of the target host (can be any address object)
      * @param read_community_name - Community for get requests
      * @param write_community_name - Community for set requests
      */
@@ -314,7 +314,7 @@ public:
      *
      * The read and write community names will be set to "public".
      *
-     * @param address - Address of the target host (cann be any address object)
+     * @param address - Address of the target host (can be any address object)
      */
     CTarget(const Address& address);
 
@@ -473,7 +473,7 @@ public:
     /**
      * Constructor with all args.
      *
-     * @param address   - Address of the target host (cann be any address
+     * @param address   - Address of the target host (can be any address
      * object)
      * @param sec_name   - The security name
      * @param sec_model - The security model to use
@@ -483,7 +483,7 @@ public:
     /**
      * Constructor with all args.
      *
-     * @param address   - Address of the target host (cann be any address
+     * @param address   - Address of the target host (can be any address
      * object)
      * @param sec_name  - The security name
      * @param sec_model - The security model to use
@@ -497,7 +497,7 @@ public:
      * Assumes the following defaults: security_name: initial, version: SNMPv3,
      * security_model: v3MP.
      *
-     * @param address - Address of the target host (cann be any address object)
+     * @param address - Address of the target host (can be any address object)
      */
     UTarget(const Address& address);
 

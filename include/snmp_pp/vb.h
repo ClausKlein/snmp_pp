@@ -95,7 +95,7 @@ public:
     /**
      * Constructor with no arguments.
      *
-     * This constructor creates an unitialized vb.
+     * This constructor creates an uninitialized vb.
      */
     Vb() : iv_vb_value(nullptr), exception_status(SNMP_CLASS_SUCCESS) { }
 

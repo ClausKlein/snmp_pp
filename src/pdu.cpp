@@ -392,7 +392,7 @@ int Pdu::get_vb(Vb& vb, const int index) const
     {
         return false; // can't ask for something not there
     }
-    vb = *vbs[index]; // asssign it
+    vb = *vbs[index]; // assign it
 
     return vb.valid();
 }

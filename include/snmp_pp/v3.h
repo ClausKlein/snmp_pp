@@ -131,7 +131,7 @@ constexpr size_t MAXLENGTH_ENGINEID { 32 };
  * These values are returned by getBootCounter() and saveBootCounter().
  */
 //@{
-#    define SNMPv3_OK               0  //!< No error
+#    define SNMPv3_OK               0    //!< No error
 #    define SNMPv3_NO_ENTRY_ERROR   (-1) //!< No line for the engine id found
 #    define SNMPv3_FILEOPEN_ERROR   (-2) //!< Unable to open file
 #    define SNMPv3_TOO_LONG_ERROR   (-3) //!< The given engineID is too long
@@ -173,7 +173,7 @@ DLLOPT unsigned char* v3strcpy(const unsigned char* src, const size_t srclen);
  * @param in        - The string (for example engine id) to encode
  * @param in_length - The length of the engineID
  * @param out       - The output buffer for the encoded string, must have
- *                    lenth 2 * in_length
+ *                    length 2 * in_length
  */
 DLLOPT void encodeString(
     const unsigned char* in, const size_t in_length, char* out);

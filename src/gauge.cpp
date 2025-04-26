@@ -42,12 +42,12 @@
  *
  * G A U G E. C P P
  *
- * GAUGE32 CLASS IMPLEMTATION
+ * GAUGE32 CLASS IMPLEMENTATION
  *
  * DESIGN + AUTHOR:  Peter E Mellquist
  *
  * DESCRIPTION:
- * Class implemtation for SMI Gauge32 class.
+ * Class implementation for SMI Gauge32 class.
  * =====================================================================*/
 
 #include "snmp_pp/gauge.h" // header file for gauge class

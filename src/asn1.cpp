@@ -622,7 +622,7 @@ unsigned char* asn_build_length(
 }
 
 /*
- * asn_parse_objid - pulls an object indentifier out of an ASN object
+ * asn_parse_objid - pulls an object identifier out of an ASN object
  * identifier type. On entry, datalength is input as the number of valid bytes
  * following "data".  On exit, it is returned as the number of valid bytes
  *   following the beginning of the next object.
@@ -1239,7 +1239,7 @@ void snmp_add_var(
     }
     break;
 
-    // octects
+    // octets
     case sNMP_SYNTAX_OCTETS:
     case sNMP_SYNTAX_OPAQUE:
     case sNMP_SYNTAX_IPADDR: {

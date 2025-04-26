@@ -175,7 +175,7 @@ public:
 
     /**
      * Return validity of the object.
-     * An SnmpUInt32 will only be invalid after a failed asignment
+     * An SnmpUInt32 will only be invalid after a failed assignment
      * of another SnmpSyntax object.
      */
     bool valid() const override { return valid_flag; }
@@ -303,7 +303,7 @@ public:
 
     /**
      * Return validity of the object.
-     * An SnmpUInt32 will only be invalid after a failed asignment
+     * An SnmpUInt32 will only be invalid after a failed assignment
      * of another SnmpSyntax object.
      */
     bool valid() const override { return valid_flag; }

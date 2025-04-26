@@ -568,7 +568,7 @@ int main(int argc, char** argv)
                 return -4;
             }
         }
-        // last vb becomes seed of next rquest
+        // last vb becomes seed of next request
         pdu.set_vblist(&vb, 1);
     }
     if (status != SNMP_ERROR_NO_SUCH_NAME)

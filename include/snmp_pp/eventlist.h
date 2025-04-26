@@ -145,7 +145,7 @@ public:
     bool GetFdArray(struct pollfd* readfds, int& remaining);
     int  HandleEvents(const struct pollfd* readfds, const int fds);
 #else
-    // set up paramters for select
+    // set up parameters for select
     void GetFdSets(
         int& maxfds, fd_set& readfds, fd_set& writefds, fd_set& exceptfds);
 

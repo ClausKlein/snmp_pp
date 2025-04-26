@@ -250,7 +250,7 @@ OctetStr& OctetStr::operator=(const OctetStr& octet)
     return *this; // return self reference
 }
 
-//==============[ equivlence operator overloaded ]====================
+//==============[ equivalence operator overloaded ]====================
 int operator==(const OctetStr& lhs, const OctetStr& rhs)
 {
     if (lhs.smival.value.string.len != rhs.smival.value.string.len)
@@ -260,7 +260,7 @@ int operator==(const OctetStr& lhs, const OctetStr& rhs)
     return lhs.nCompare(rhs.smival.value.string.len, rhs) == 0;
 }
 
-//==============[ not equivlence operator overloaded ]================
+//==============[ not equivalence operator overloaded ]================
 int operator!=(const OctetStr& lhs, const OctetStr& rhs)
 {
     if (lhs.smival.value.string.len != rhs.smival.value.string.len)
@@ -314,7 +314,7 @@ int operator>=(const OctetStr& lhs, const OctetStr& rhs)
     return lhs.nCompare(maxlen, rhs) >= 0;
 }
 
-//===============[ equivlence operator overloaded ]===================
+//===============[ equivalence operator overloaded ]===================
 int operator==(const OctetStr& lhs, const char* rhs)
 {
     OctetStr const to(rhs);
@@ -326,7 +326,7 @@ int operator==(const OctetStr& lhs, const char* rhs)
     return lhs.nCompare(to.smival.value.string.len, to) == 0;
 }
 
-//===============[ not equivlence operator overloaded ]===============
+//===============[ not equivalence operator overloaded ]===============
 int operator!=(const OctetStr& lhs, const char* rhs)
 {
     OctetStr const to(rhs);
@@ -700,14 +700,14 @@ SnmpSyntax& OctetStr::operator=(const SnmpSyntax& val)
     return *this;
 }
 
-#define ATOI(x)                       \
+#define ATOI(x)                           \
     if (((x) >= 48) && ((x) <= 57))       \
         (x) = (x) - 48; /* 0-9 */         \
     else if (((x) >= 65) && ((x) <= 70))  \
         (x) = (x) - 55; /* A-F */         \
     else if (((x) >= 97) && ((x) <= 102)) \
         (x) = (x) - 87; /* a-f */         \
-    else                              \
+    else                                  \
         (x) = 0
 
 //=======[ create an octet string from a hex string ]===================

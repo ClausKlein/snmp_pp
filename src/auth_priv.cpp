@@ -866,7 +866,7 @@ int AuthPriv::password_to_key_priv(const int auth_prot, const int priv_prot,
         return res;
     }
 
-    /* We have a too short key: Call priv protocoll to extend it */
+    /* We have a too short key: Call priv protocol to extend it */
     if (*key_len < min_key_len)
     {
         res = p->extend_short_key(password, password_len, engine_id,

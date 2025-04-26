@@ -129,7 +129,7 @@
 #endif
 
 // define _IPX_ADDRESS and/or _MAC_ADDRESS if you want to use the
-// classess IpxAddress/IpxSockAddress and/or MacAddress
+// classes IpxAddress/IpxSockAddress and/or MacAddress
 #if @WITH_MACADDRESS@
 #    define _MAC_ADDRESS
 #else

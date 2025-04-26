@@ -513,7 +513,7 @@ public:
 
     /**
      * Send raw UDP data.
-     * This method may be used to send any data to the recepient.
+     * This method may be used to send any data to the recipient.
      *
      * @param send_buf - Data buffer
      * @param send_len - Length of the data

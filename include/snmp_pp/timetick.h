@@ -144,7 +144,7 @@ public:
     /**
      * Overloaded assignment for unsigned longs.
      *
-     * @param ul - new value in hundrets of seconds
+     * @param ul - new value in hundreds of seconds
      * @return self reference
      */
     TimeTicks& operator=(const uint32_t ul)

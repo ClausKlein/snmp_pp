@@ -258,7 +258,7 @@ else()
   set(_DEBUG 0)
 endif()
 
-option(USE_OUTPUT_PATH "build all libaries and runtime files at the bin directory" YES)
+option(USE_OUTPUT_PATH "build all libraries and runtime files at the bin directory" YES)
 if(USE_OUTPUT_PATH)
   set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
   set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
@@ -520,7 +520,7 @@ target_include_directories(
          $<INSTALL_INTERFACE:include>
 )
 
-# Note: for SameMajorVersion upgrade stategy
+# Note: for SameMajorVersion upgrade strategy
 set_target_properties(
   ${PROJECT_NAME}
   PROPERTIES SOVERSION ${PROJECT_VERSION_MAJOR}

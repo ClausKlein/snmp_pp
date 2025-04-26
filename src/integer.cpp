@@ -42,12 +42,12 @@
  *
  * I N T E G E R . C P P
  *
- * SMI INTEGER CLASS IMPLEMTATION
+ * SMI INTEGER CLASS IMPLEMENTATION
  *
  * DESIGN + AUTHOR: Jeff Meyer
  *
  * DESCRIPTION:
- * Class implemtation for SMI Integer classes.
+ * Class implementation for SMI Integer classes.
  * =====================================================================*/
 
 #include "snmp_pp/integer.h" // header file for gauge class
@@ -64,7 +64,7 @@ SnmpSyntax& SnmpUInt32::operator=(const SnmpSyntax& in_val)
 {
     if (this == &in_val)
     {
-        return *this;   // handle assignement from itself
+        return *this;   // handle assignment from itself
     }
     valid_flag = false; // will get set true if really valid
     if (in_val.valid())
@@ -147,7 +147,7 @@ SnmpSyntax& SnmpInt32::operator=(const SnmpSyntax& in_val)
 {
     if (this == &in_val)
     {
-        return *this;   // handle assignement from itself
+        return *this;   // handle assignment from itself
     }
     valid_flag = false; // will get set true if really valid
     if (in_val.valid())

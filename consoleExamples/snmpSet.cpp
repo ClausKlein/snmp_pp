@@ -702,7 +702,7 @@ int main(int argc, char** argv)
 #endif
         target = &ctarget;
 
-    // first get the variabel to determine its type
+    // first get the variable to determine its type
     if ((status = snmp.get(pdu, *target)) == SNMP_CLASS_SUCCESS)
     {
         pdu.get_vb(vb, 0);

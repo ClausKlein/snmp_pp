@@ -372,7 +372,7 @@ int SnmpMessage::load(
         {
             // note!!
             // these are hooks into an SNMP++ oid
-            // and therefor the raw_pdu enterprise
+            // and therefore the raw_pdu enterprise
             // should not free them. null them out!!
             SmiLPOID rawOid            = nullptr;
             rawOid                     = enterprise.oidval();
@@ -799,7 +799,7 @@ int SnmpMessage::unload(Pdu& pdu,           // Pdu object
         // ip address
         case sNMP_SYNTAX_IPADDR: {
             char buffer[42] {};
-            buffer[0] = 0; // in case we receive an inavlid length IP
+            buffer[0] = 0; // in case we receive an invalid length IP
 
             if (vp->val_len == 16)
             {

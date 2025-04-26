@@ -307,7 +307,7 @@ DLLOPT void clear_pdu(struct snmp_pdu* pdu, bool clear_all = false);
  * @param securityModel  - The security model
  *
  * @return - Pointer to the first free byte in the buffer or
- *           NULL if an error occured
+ *           NULL if an error occurred
  */
 DLLOPT unsigned char* asn1_build_header_data(unsigned char* outBuf,
     int* maxLength, SmiINT32 msgID, SmiINT32 maxMessageSize,
@@ -390,7 +390,7 @@ DLLOPT unsigned char* asn1_parse_scoped_pdu(unsigned char* scoped_pdu,
  * param dataLength        - The length of the data
  *
  * @return - Pointer to the first free byte in the buffer or
- *           NULL if an error occured
+ *           NULL if an error occurred
  */
 DLLOPT unsigned char* asn1_build_scoped_pdu(unsigned char* outBuf,
     int* max_len, unsigned char* contextEngineID, long contextEngineIDLength,

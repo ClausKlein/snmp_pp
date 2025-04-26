@@ -95,7 +95,7 @@ public:
      *
      * The Pdu class does not take ownership of the array and the Vb
      * objects, so if these were allocated with new, they must be freed
-     * by te user with delete.
+     * by the user with delete.
      *
      * @param pvbs      - Array of pointers to Vb objects
      * @param pvb_count - Length of the array
@@ -159,7 +159,7 @@ public:
      *
      * The vb objects of the pdu will be freed and the objects from the
      * array will be cloned and added to the pdu. If this method returns
-     * false, the pdu will not conatin any Vb objects.
+     * false, the pdu will not contain any Vb objects.
      *
      * @param pvbs - Array of valid pointers of size pvb_count
      * @param pvb_count - Amount of Vb pointers i the array
@@ -407,7 +407,7 @@ public:
     /**
      * Get the context name of the Pdu.
      *
-     * @param name - Object fot the context name
+     * @param name - Object for the context name
      */
     bool get_context_name(OctetStr& name) const
     {
@@ -541,7 +541,7 @@ protected:
     unsigned short pdu_type {}; // derived at run time based on request type
     // for notify Pdu objects only
     // traps & notifies
-    TimeTicks  notify_timestamp; // a timestamp associated with an infor
+    TimeTicks  notify_timestamp; // a timestamp associated with an inform
     Oid        notify_id;        // an id
     Oid        notify_enterprise;
     GenAddress v1_trap_address;  // address object

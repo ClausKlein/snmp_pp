@@ -467,7 +467,7 @@ public:
     /**
      * Get a user of the usmUserTable.
      *
-     * @note call delete_cloned_entry() with the retruned pointer.
+     * @note call delete_cloned_entry() with the returned pointer.
      *
      * @param engine_id - Get a user for this engine id
      * @param sec_name  - Get the user with this security name

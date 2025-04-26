@@ -101,18 +101,19 @@ namespace Snmp_pp
 //@{
 
 // General
-#define SNMP_CLASS_SUCCESS          0  //!< success
+#define SNMP_CLASS_SUCCESS          0    //!< success
 #define SNMP_CLASS_ERROR            (-1) //!< general error
 #define SNMP_CLASS_RESOURCE_UNAVAIL (-2) //!< e.g., malloc failed
 #define SNMP_CLASS_INTERNAL_ERROR   (-3) //!< unexpected / internal error
 #define SNMP_CLASS_UNSUPPORTED      (-4) //!< unsupported function
 
 // Callback reasons:
-#define SNMP_CLASS_TIMEOUT        (-5) //!< outstanding request timed out
-#define SNMP_CLASS_ASYNC_RESPONSE (-6) //!< received response for outstd request
-#define SNMP_CLASS_NOTIFICATION   (-7) //!< received notification (trap/inform)
+#define SNMP_CLASS_TIMEOUT (-5)      //!< outstanding request timed out
+#define SNMP_CLASS_ASYNC_RESPONSE \
+    (-6)                             //!< received response for outstd request
+#define SNMP_CLASS_NOTIFICATION (-7) //!< received notification (trap/inform)
 #define SNMP_CLASS_SESSION_DESTROYED \
-    (-8) //!< snmp::destroyed with oustanding reqs pending
+    (-8) //!< snmp::destroyed with outstanding reqs pending
 
 // Snmp Class:
 #define SNMP_CLASS_INVALID          (-10) //!< snmp::mf called on invalid instance

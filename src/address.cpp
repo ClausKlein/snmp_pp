@@ -168,7 +168,7 @@ bool operator<(const Address& lhs, const Address& rhs)
 }
 
 //------------------------------------------------------------------
-// equivlence operator overloaded, are an address and a string equal?
+// equivalence operator overloaded, are an address and a string equal?
 bool operator==(const Address& lhs, const char* rhs)
 {
     ADDRESS_TRACE2;
@@ -260,7 +260,7 @@ bool operator<=(const Address& lhs, const char* rhs)
 //============ IPAddress Implementation ===============================
 //=====================================================================
 
-//-------[ construct an IP address with no agrs ]----------------------
+//-------[ construct an IP address with no args ]----------------------
 IpAddress::IpAddress()
     : Address(), iv_friendly_name_status(0), ip_version(version_ipv4),
       have_ipv6_scope(false)
@@ -651,14 +651,14 @@ int IpAddress::parse_dotted_ipstring(const char* inaddr)
     return true;
 }
 
-#define ATOI(x)                       \
+#define ATOI(x)                           \
     if (((x) >= 48) && ((x) <= 57))       \
         (x) = (x) - 48; /* 0-9 */         \
     else if (((x) >= 97) && ((x) <= 102)) \
         (x) = (x) - 87; /* a-f */         \
     else if (((x) >= 65) && ((x) <= 70))  \
         (x) = (x) - 55; /* A-F */         \
-    else                              \
+    else                                  \
         (x) = 0
 
 // parse a coloned string
@@ -1571,7 +1571,7 @@ void IpAddress::clear()
 //========== Udp Address Implementation =================================
 //=======================================================================
 
-//-------[ construct an IP address with no agrs ]----------------------
+//-------[ construct an IP address with no args ]----------------------
 UdpAddress::UdpAddress() : IpAddress()
 {
     ADDRESS_TRACE;
@@ -2114,7 +2114,7 @@ bool UdpAddress::set_scope(const unsigned int scope)
 /**
  * Map a IPv4 UDP address to a IPv6 UDP address.
  *
- * @return - true if no error occured.
+ * @return - true if no error occurred.
  */
 bool UdpAddress::map_to_ipv6()
 {
@@ -2321,7 +2321,7 @@ bool IpxAddress::parse_address(const char* inaddr)
     char unsigned* tmp;
     size_t         z, tmplen;
 
-    // save the orginal source
+    // save the original source
     if (!inaddr || (strlen(inaddr) >= sizeof(temp)))
     {
         return false;
@@ -2905,7 +2905,7 @@ bool MacAddress::parse_address(const char* inaddr)
     char unsigned* tmp;
     size_t         z;
 
-    // save the orginal source
+    // save the original source
     if (!inaddr || (strlen(inaddr) >= sizeof(temp)))
     {
         return false;

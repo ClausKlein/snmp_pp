@@ -48,7 +48,7 @@ namespace Snmp_pp
 
 EventListHolder::EventListHolder(Snmp* snmp_session)
 {
-    // Automaticly add the SNMP message queue
+    // Automatically add the SNMP message queue
     m_snmpMessageQueue = new CSNMPMessageQueue(this, snmp_session);
     m_eventList.AddEntry(m_snmpMessageQueue);
 
@@ -57,13 +57,13 @@ EventListHolder::EventListHolder(Snmp* snmp_session)
     m_eventList.AddEntry(m_notifyEventQueue);
 
 #ifdef _USER_DEFINED_EVENTS
-    // Automaticly add the user-defined event queue
+    // Automatically add the user-defined event queue
     m_udEventQueue = new CUDEventQueue(this);
     m_eventList.AddEntry(m_udEventQueue);
 #endif
 
 #ifdef _USER_DEFINED_TIMEOUTS
-    // Automaticly add the user-defined timeout queue
+    // Automatically add the user-defined timeout queue
     m_utEventQueue = new CUTEventQueue(this);
     m_eventList.AddEntry(m_utEventQueue);
 #endif
@@ -169,7 +169,7 @@ int EventListHolder::SNMPProcessEvents(const int max_block_milliseconds)
     struct pollfd* pollfds    = 0;
     struct timeval fd_timeout = {};
     int            timeout;
-    msec           now; // automatcally calls msec::refresh()
+    msec           now; // automatically calls msec::refresh()
     msec           sendTime;
     int            status = 0;
 
@@ -351,7 +351,7 @@ uint32_t EventListHolder::SNMPGetNextTimeout()
     // TM: This function used to have an argument of sendTime and
     //    would simply call eventList.GetNextTimeout(sendTime) and
     //    return the status.  However, to avoid exposing the msec
-    //    class we now convert the msec to hundreths of seconds
+    //    class we now convert the msec to hundredths of seconds
     //    and return that as a uint32_t.
     // 25-Jan-96 TM
 
@@ -364,14 +364,14 @@ uint32_t EventListHolder::SNMPGetNextTimeout()
     {
         // Kludge: When this was first designed the units were millisecs
         // However, later on the units for the target class were changed
-        // to hundreths of secs.  Divide millisecs by 10 to create the
-        // hundreths of secs which the rest of the objects use.
+        // to hundredths of secs.  Divide millisecs by 10 to create the
+        // hundredths of secs which the rest of the objects use.
         // 25-Jan-96 TM
 
         // 21-May-02 DLD: Add check to avoid returning a negative interval
         // Long eventlists seem to end up with events that are greater
         // than the time when the event loop is started, but less than the
-        // time when this function is called.  This check is analagous to
+        // time when this function is called.  This check is analogous to
         // what is done in msec::GetDelta() which is used in
         // SNMPProcessEvents(), the library main loop.
 

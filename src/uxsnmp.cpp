@@ -81,7 +81,7 @@ static const char* loggerModuleName = "snmp++.uxsnmp";
 #    define close closesocket
 #endif
 
-//--------[ statics ]---------------------------------------------------
+//--------[ statistics ]---------------------------------------------------
 
 /**
  * ASCII strings returned through Snmp::error() function.
@@ -1817,8 +1817,8 @@ int Snmp::notify_unregister()
 // async requests return out early and don't wait in here for
 // the response
 int Snmp::snmp_engine(Pdu& pdu,      // pdu to use
-    long int               non_reps, // # of non repititions
-    long int               max_reps, // # of max repititions
+    long int               non_reps, // # of non repetitions
+    long int               max_reps, // # of max repetitions
     SnmpTarget&            target,   // from this target
     const snmp_callback    cb,       // callback for async calls
     const void*            cbd,      // callback data
