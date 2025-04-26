@@ -142,7 +142,7 @@ namespace Snmp_pp
 //@{
 #    define SNMPv3_USM_MAX_ERROR  SNMPv3_USM_FILEREAD_ERROR
 #    define SNMPv3_USM_MIN_ERROR  SNMPv3_USM_OK
-#    define SNMPv3_USM_ERRORCOUNT SNMPv3_USM_MAX_ERROR - SNMPv3_USM_MIN_ERROR
+#    define SNMPv3_USM_ERRORCOUNT (SNMPv3_USM_MAX_ERROR - SNMPv3_USM_MIN_ERROR)
 //@}
 
 #    define oidUsmStats                     "1.3.6.1.6.3.15.1.1"

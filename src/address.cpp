@@ -652,14 +652,14 @@ int IpAddress::parse_dotted_ipstring(const char* inaddr)
 }
 
 #define ATOI(x)                       \
-    if ((x >= 48) && (x <= 57))       \
-        x = x - 48; /* 0-9 */         \
-    else if ((x >= 97) && (x <= 102)) \
-        x = x - 87; /* a-f */         \
-    else if ((x >= 65) && (x <= 70))  \
-        x = x - 55; /* A-F */         \
+    if (((x) >= 48) && ((x) <= 57))       \
+        (x) = (x) - 48; /* 0-9 */         \
+    else if (((x) >= 97) && ((x) <= 102)) \
+        (x) = (x) - 87; /* a-f */         \
+    else if (((x) >= 65) && ((x) <= 70))  \
+        (x) = (x) - 55; /* A-F */         \
     else                              \
-        x = 0
+        (x) = 0
 
 // parse a coloned string
 int IpAddress::parse_coloned_ipstring(const char* inaddr)

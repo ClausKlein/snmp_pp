@@ -57,32 +57,32 @@ class OctetStr;
 
 /** @name Error codes of the v3MP */
 //@{
-#    define SNMPv3_MP_ERROR                      -1400
-#    define SNMPv3_MP_OK                         -1401
-#    define SNMPv3_MP_UNSUPPORTED_SECURITY_MODEL -1402
-#    define SNMPv3_MP_NOT_IN_TIME_WINDOW         -1403
-#    define SNMPv3_MP_DOUBLED_MESSAGE            -1404
-#    define SNMPv3_MP_INVALID_MESSAGE            -1405
-#    define SNMPv3_MP_INVALID_ENGINEID           -1406
-#    define SNMPv3_MP_NOT_INITIALIZED            -1407
-#    define SNMPv3_MP_PARSE_ERROR                -1408
-#    define SNMPv3_MP_UNKNOWN_MSGID              -1409
-#    define SNMPv3_MP_MATCH_ERROR                -1410
-#    define SNMPv3_MP_COMMUNITY_ERROR            -1411
-#    define SNMPv3_MP_WRONG_USER_NAME            -1412
-#    define SNMPv3_MP_BUILD_ERROR                -1413
-#    define SNMPv3_MP_USM_ERROR                  -1414
-#    define SNMPv3_MP_UNKNOWN_PDU_HANDLERS       -1415
-#    define SNMPv3_MP_UNAVAILABLE_CONTEXT        -1416
-#    define SNMPv3_MP_UNKNOWN_CONTEXT            -1417
-#    define SNMPv3_MP_REPORT_SENT                -1418
+#    define SNMPv3_MP_ERROR                      (-1400)
+#    define SNMPv3_MP_OK                         (-1401)
+#    define SNMPv3_MP_UNSUPPORTED_SECURITY_MODEL (-1402)
+#    define SNMPv3_MP_NOT_IN_TIME_WINDOW         (-1403)
+#    define SNMPv3_MP_DOUBLED_MESSAGE            (-1404)
+#    define SNMPv3_MP_INVALID_MESSAGE            (-1405)
+#    define SNMPv3_MP_INVALID_ENGINEID           (-1406)
+#    define SNMPv3_MP_NOT_INITIALIZED            (-1407)
+#    define SNMPv3_MP_PARSE_ERROR                (-1408)
+#    define SNMPv3_MP_UNKNOWN_MSGID              (-1409)
+#    define SNMPv3_MP_MATCH_ERROR                (-1410)
+#    define SNMPv3_MP_COMMUNITY_ERROR            (-1411)
+#    define SNMPv3_MP_WRONG_USER_NAME            (-1412)
+#    define SNMPv3_MP_BUILD_ERROR                (-1413)
+#    define SNMPv3_MP_USM_ERROR                  (-1414)
+#    define SNMPv3_MP_UNKNOWN_PDU_HANDLERS       (-1415)
+#    define SNMPv3_MP_UNAVAILABLE_CONTEXT        (-1416)
+#    define SNMPv3_MP_UNKNOWN_CONTEXT            (-1417)
+#    define SNMPv3_MP_REPORT_SENT                (-1418)
 //@}
 
 /** @name Statistics on error codes. */
 //@{
 #    define SNMPv3_MP_MAX_ERROR  SNMPv3_MP_ERROR
 #    define SNMPv3_MP_MIN_ERROR  SNMPv3_MP_REPORT_SENT
-#    define SNMPv3_MP_ERRORCOUNT SNMPv3_MP_MAX_ERROR - SNMPv3_MP_MIN_ERROR
+#    define SNMPv3_MP_ERRORCOUNT (SNMPv3_MP_MAX_ERROR - SNMPv3_MP_MIN_ERROR)
 //@}
 
 class Snmp;

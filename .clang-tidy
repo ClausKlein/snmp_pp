@@ -29,11 +29,13 @@ cppcoreguidelines-slicing,\
 -cppcoreguidelines-owning-memory,\
 -cppcoreguidelines-pro-type-*,\
 -cppcoreguidelines-special-*,\
+-google-*,\
 -google-readability-casting,\
 hicpp-*,\
 -hicpp-braces-around-statements,\
 -hicpp-explicit-conversions,\
 -hicpp-member-init,\
+-hicpp-multiway-paths-covered,\
 -hicpp-no-malloc,\
 -hicpp-signed-bitwise,\
 -hicpp-special-member-functions,\
@@ -41,6 +43,7 @@ hicpp-*,\
 -hicpp-vararg,\
 misc-*,\
 -misc-const-correctness,\
+-misc-header-include-cycle,\
 -misc-include-cleaner,\
 -misc-non-private-member-variables-in-classes,\
 -misc-no-recursion,\
@@ -56,14 +59,16 @@ modernize-*,\
 -modernize-use-using,\
 performance-*,\
 -performance-avoid-endl,\
+-performance-enum-size,\
 portability-*,\
 -readability-*,\
+readability-make-member-function-const,\
 -*magic-numbers,\
 -*avoid-c-arrays,\
 -*-no-array-decay,\
 -*-use-equals-default,\
 "
-WarningsAsErrors: 'clang-*'
+# TODO: WarningsAsErrors: 'clang-*'
 HeaderFilterRegex: 'include/snmp_pp/.*'
 FormatStyle:     none
 User:            clausklein

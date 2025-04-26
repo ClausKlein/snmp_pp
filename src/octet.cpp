@@ -701,14 +701,14 @@ SnmpSyntax& OctetStr::operator=(const SnmpSyntax& val)
 }
 
 #define ATOI(x)                       \
-    if ((x >= 48) && (x <= 57))       \
-        x = x - 48; /* 0-9 */         \
-    else if ((x >= 65) && (x <= 70))  \
-        x = x - 55; /* A-F */         \
-    else if ((x >= 97) && (x <= 102)) \
-        x = x - 87; /* a-f */         \
+    if (((x) >= 48) && ((x) <= 57))       \
+        (x) = (x) - 48; /* 0-9 */         \
+    else if (((x) >= 65) && ((x) <= 70))  \
+        (x) = (x) - 55; /* A-F */         \
+    else if (((x) >= 97) && ((x) <= 102)) \
+        (x) = (x) - 87; /* a-f */         \
     else                              \
-        x = 0
+        (x) = 0
 
 //=======[ create an octet string from a hex string ]===================
 OctetStr OctetStr::from_hex_string(const OctetStr& hex_string)

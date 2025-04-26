@@ -108,8 +108,8 @@ namespace Snmp_pp
 #define IP6LEN_WITH_SCOPE    20
 #define UDPIP6LEN_NO_SCOPE   18
 #define UDPIP6LEN_WITH_SCOPE 22
-#define IS_IP6LEN(n)         ((n == 16) || (n == 20))
-#define IS_UDPIP6LEN(n)      ((n == 18) || (n == 22))
+#define IS_IP6LEN(n)         (((n) == 16) || ((n) == 20))
+#define IS_UDPIP6LEN(n)      (((n) == 18) || ((n) == 22))
 #define IPXLEN               10
 #define IPXSOCKLEN           12
 #define MACLEN               6

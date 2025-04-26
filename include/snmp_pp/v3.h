@@ -132,12 +132,12 @@ constexpr size_t MAXLENGTH_ENGINEID { 32 };
  */
 //@{
 #    define SNMPv3_OK               0  //!< No error
-#    define SNMPv3_NO_ENTRY_ERROR   -1 //!< No line for the engine id found
-#    define SNMPv3_FILEOPEN_ERROR   -2 //!< Unable to open file
-#    define SNMPv3_TOO_LONG_ERROR   -3 //!< The given engineID is too long
-#    define SNMPv3_FILE_ERROR       -4 //!< The given file contains a wrong line
-#    define SNMPv3_FILECREATE_ERROR -5 //!< The File could not be created
-#    define SNMPv3_FILERENAME_ERROR -6 //!< Error renaming the temporary file
+#    define SNMPv3_NO_ENTRY_ERROR   (-1) //!< No line for the engine id found
+#    define SNMPv3_FILEOPEN_ERROR   (-2) //!< Unable to open file
+#    define SNMPv3_TOO_LONG_ERROR   (-3) //!< The given engineID is too long
+#    define SNMPv3_FILE_ERROR       (-4) //!< The given file contains a wrong line
+#    define SNMPv3_FILECREATE_ERROR (-5) //!< The File could not be created
+#    define SNMPv3_FILERENAME_ERROR (-6) //!< Error renaming the temporary file
 //@}
 
 /**

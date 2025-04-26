@@ -309,7 +309,7 @@ AgentLog::AgentLog()
 #if defined(WITH_LOG_PROFILES)
 void AgentLog::set_profile(const char* const logprofile)
 {
-    int*       log_profile;
+    int*       log_profile = nullptr;
     auto const item = logfilter_profiles.find(logprofile);
 
     if (item != logfilter_profiles.end())

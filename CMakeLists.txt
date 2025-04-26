@@ -32,19 +32,17 @@ set(SNMP_PP_NAMESPACE ON) # "Enable using of namespace (needed!)" ON)
 set(SNMP_PP_SNMPv3 ON) # "Enable support for SNMPv3 (needed!)" ON)
 set(SNMP_PP_THREADS ON) # "Enable support for threads (needed!)" ON)
 
-if(NOT PROJECT_IS_TOP_LEVEL)
-  option(CMAKE_SKIP_INSTALL_RULES "Whether to disable generation of installation rules" YES)
-endif()
-
 option(SNMP_PP_EXAMPLES "Enable to build examples" ON)
 option(SNMP_PP_EXTENDED_DEBUG "Enable additional debug messages" OFF)
 option(SNMP_PP_IPXADDR "Enable IpxAddress class" OFF)
 option(SNMP_PP_IPv6 "Enable support for IPv6" ON)
 option(SNMP_PP_LIBDES "Search for DES library (At least needed for Windows!)" ON)
 option(SNMP_PP_LIBTOMCRYPT "Search for Tomcrypt library" OFF)
-option(SNMP_PP_LOGGING "Enable logging" ${PROJECT_IS_TOP_LEVEL})
+option(SNMP_PP_LOGGING "Enable logging" OFF)
 option(SNMP_PP_MACADDR "Enable MacAddress class" OFF)
 option(SNMP_PP_OPENSSL "Search for OpenSSL library" ON)
+
+include(Features.cmake)
 
 if(SNMP_PP_LOGGING)
   set(LogProfile
@@ -457,37 +455,6 @@ set(MY_SRC_FILES
     src/v3.cpp
     src/vb.cpp
 )
-
-option(BUILD_SHARED_LIBS "Global flag to cause add_library() to create shared libraries if on." YES)
-
-if(APPLE)
-  set(OPTION_ENABLED_SANITIZER
-      "ENABLE_SANITIZER_ADDRESS; ENABLE_SANITIZER_UNDEFINED_BEHAVIOR"
-      CACHE STRING "Enabled sanitizer for debug build"
-  )
-else()
-  set(OPTION_ENABLED_SANITIZER
-      "ENABLE_SANITIZER_MEMORY"
-      CACHE STRING "Enabled sanitizer for debug build"
-  )
-endif()
-option(OPTION_ENABLE_COVERAGE "Enable test coverage of projects" OFF)
-if(OPTION_ENABLE_COVERAGE)
-  set(ENABLE_COVERAGE "ENABLE_COVERAGE")
-endif()
-
-if(SNMP_PP_LOGGING)
-  set(OPTION_ENABLE_UNITY
-      OFF
-      CACHE STRING "forced" FORCE
-  )
-else()
-  option(OPTION_ENABLE_UNITY "Enable Unity builds of projects" ON)
-endif()
-
-if(OPTION_ENABLE_UNITY)
-  set(ENABLE_UNITY "ENABLE_UNITY")
-endif()
 
 project_options(
   PREFIX
