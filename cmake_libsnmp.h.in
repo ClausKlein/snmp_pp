@@ -153,7 +153,10 @@ extern "C" int strcasecmp(const char *s1, const char *s2);
 #cmakedefine CNF_HAVE_STRUCT_SOCKADDR_STORAGE_SS_FAMILY
 
 
-#if !(defined(__APPLE__) || defined(__BSD__))
+#cmakedefine HAVE_STRLCPY
+#cmakedefine HAVE_STRLCAT
+
+#if !(defined(HAVE_STRLCPY) || defined(HAVE_STRLCAT))
 #include <cassert>
 
 namespace {
