@@ -74,7 +74,8 @@ EventListHolder::EventListHolder(Snmp* snmp_session)
 // Handle any other events as they occur.
 int EventListHolder::SNMPBlockForResponse(const uint32_t req_id, Pdu& pdu)
 {
-    do {
+    do
+    {
         SNMPProcessEvents(DEFAULT_MAX_BLOCK_EVENT_TIME);
     } while (!m_snmpMessageQueue->Done(req_id));
 
@@ -117,8 +118,10 @@ int EventListHolder::SNMPProcessPendingEvents()
     timeout = 1;          // chosen a very small timeout
     // in order to avoid busy looping but keep overall performance
 
-    do {
-        do {
+    do
+    {
+        do
+        {
             fdcount = m_eventList.GetFdCount();
             if (pollfds)
             {
@@ -176,7 +179,8 @@ int EventListHolder::SNMPProcessEvents(const int max_block_milliseconds)
     m_eventList.GetNextTimeout(sendTime);
     now.GetDelta(sendTime, fd_timeout);
 
-    do {
+    do
+    {
         fdcount = m_eventList.GetFdCount();
         if (pollfds)
         {
@@ -231,7 +235,8 @@ int EventListHolder::SNMPProcessPendingEvents()
 
     pevents_mutex.lock(); // FIXME: not exception save! CK
 
-    do {
+    do
+    {
         // do not allow select to block; chosen a very small timeout
         // in order to avoid busy looping but keep overall performance
         fd_timeout.tv_sec  = 0;
@@ -315,7 +320,8 @@ int EventListHolder::SNMPProcessEvents(const int max_block_milliseconds)
 // any events as they occur.
 void EventListHolder::SNMPMainLoop(const int max_block_milliseconds)
 {
-    do {
+    do
+    {
         SNMPProcessEvents(max_block_milliseconds);
     } while (!m_eventList.Done());
 }

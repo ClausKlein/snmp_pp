@@ -330,7 +330,8 @@ long Snmp::MyMakeReqId()
     long rid = 0;
 
     eventListHolder->snmpEventList()->lock(); // FIXME: not exception save! CK
-    do {
+    do
+    {
         rid = ++current_rid;
 
 #ifdef INVALID_REQID
@@ -461,7 +462,8 @@ int receive_snmp_response(SnmpSocket sock, Snmp& snmp_session, Pdu& pdu,
     memset(&from_addr, 0, sizeof(from_addr));
 
     // do the read
-    do {
+    do
+    {
         receive_buffer_len = (long)recvfrom(sock, (char*)receive_buffer,
             MAX_SNMP_PACKET + 1, 0, (struct sockaddr*)&from_addr, &fromlen);
         debugprintf(2, "++ SNMP++: something received...");
@@ -596,7 +598,8 @@ int receive_snmp_notification(
     memset(&from_addr, 0, sizeof(from_addr));
 
     // do the read
-    do {
+    do
+    {
         receive_buffer_len = (long)recvfrom(sock, (char*)receive_buffer,
             MAX_SNMP_PACKET + 1, 0, (struct sockaddr*)&from_addr, &fromlen);
     } while (receive_buffer_len < 0 && EINTR == errno);
@@ -2382,7 +2385,8 @@ int Snmp::engine_id_discovery(
 
     end_time += timeout_sec * 1000;
 
-    do {
+    do
+    {
         bool something_to_receive = false;
         end_time.GetDeltaFromNow(fd_timeout);
 
@@ -2549,7 +2553,8 @@ int Snmp::broadcast_discovery(UdpAddressCollection& addresses,
 
     end_time += timeout_sec * 1000;
 
-    do {
+    do
+    {
         bool something_to_receive = false;
         end_time.GetDeltaFromNow(fd_timeout);
 

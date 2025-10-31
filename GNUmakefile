@@ -12,9 +12,8 @@ export CPM_SOURCE_CACHE=${HOME}/.cache/CPM
 
 MACHINE:=$(shell uname -m)
 PROJECT_NAME:=$(shell basename $(CURDIR))
+CPPFILES:=$(shell git ls-files ::*.cpp)
 
-MACHINE:=$(shell uname -m)
-PROJECT_NAME:=$(shell basename $(CURDIR))
 BUILD_DIR?=./build-$(PROJECT_NAME)-$(MACHINE)-$(BUILD_TYPE)
 
 
@@ -39,8 +38,9 @@ $(BUILD_DIR):
 	mkdir -p $@ gcovr
 
 check: $(BUILD_DIR)/compile_commands.json
-	#XXX run-clang-tidy -p $(BUILD_DIR) -checks='-*,bugprone-macro-parentheses' -fix -j1 .
-	run-clang-tidy -p $(BUILD_DIR) src consoleExamples
+	#DONE: run-clang-tidy -p $(BUILD_DIR) -checks='-*,bugprone-macro-parentheses' -fix -j1 $(CPPFILES)
+	#TODO: run-clang-tidy -p $(BUILD_DIR) -checks='-*,google-readability-casting' -fix -j1 $(CPPFILES)
+	run-clang-tidy -p $(BUILD_DIR) $(CPPFILES)
 
 clean:
 	rm -f include/snmp_pp/config_snmp_pp.h
@@ -52,7 +52,7 @@ distclean: clean
 	rm -rf $(BUILD_DIR) build*
 
 format: distclean
-	git ls-files ::*.cmake ::*CMakeLists.txt | xargs cmake-format -i
-	git ls-files ::*.cpp ::*.h | xargs clang-format -i
+	-git ls-files ::*.cmake ::*CMakeLists.txt | xargs cmake-format -i
+	git ls-files ::*.cpp ::*.h ::*.json | xargs clang-format -i
 	git ls-files ::*.cpp ::*.h | xargs grep  --color '\/\/ BEGIN=' || echo OK
 

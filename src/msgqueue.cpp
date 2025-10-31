@@ -398,7 +398,8 @@ int CSNMPMessageQueue::DeleteEntry(const uint32_t uniqueId)
 {
     bool loopAgain = false;
 
-    do {
+    do
+    {
         loopAgain                       = false;
         CSNMPMessageQueueElt* msgEltPtr = m_head.GetNext();
 
@@ -621,7 +622,8 @@ int CSNMPMessageQueue::HandleEvents(
 
             CSNMPMessage* msg = 0;
             bool          redoGetEntry;
-            do {
+            do
+            {
                 redoGetEntry = false;
                 lock();
                 // find the corresponding msg in the message queue
@@ -756,7 +758,8 @@ int CSNMPMessageQueue::HandleEvents(const int maxfds, const fd_set& readfds,
 
             CSNMPMessage* msg          = nullptr;
             bool          redoGetEntry = false;
-            do {
+            do
+            {
                 redoGetEntry = false;
                 lock(); // FIXME: not exception save! CK
                 // find the corresponding msg in the message queue
