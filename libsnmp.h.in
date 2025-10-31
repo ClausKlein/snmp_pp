@@ -106,7 +106,7 @@
 #include <sys/timeb.h> // and _ftime
 #endif
 
-// TODO: wrong oder! CK
+// TODO: wrong order! CK
 //
 // see https://docs.microsoft.com/en-us/windows/win32/winsock/creating-a-basic-winsock-application
 // The WIN32_LEAN_AND_MEAN macro prevents the Winsock.h from being included by the Windows.h header.

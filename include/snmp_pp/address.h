@@ -86,7 +86,7 @@
 #    endif
 
 #    if !defined __CYGWIN32__ && !defined __hpux && !defined linux \
-        && !defined                                          _AIX
+        && !defined _AIX
 extern int h_errno; // defined in WinSock header, but not for UX?!
 #    endif
 #endif              // __unix
@@ -108,8 +108,8 @@ namespace Snmp_pp
 #define IP6LEN_WITH_SCOPE    20
 #define UDPIP6LEN_NO_SCOPE   18
 #define UDPIP6LEN_WITH_SCOPE 22
-#define IS_IP6LEN(n)         ((n == 16) || (n == 20))
-#define IS_UDPIP6LEN(n)      ((n == 18) || (n == 22))
+#define IS_IP6LEN(n)         (((n) == 16) || ((n) == 20))
+#define IS_UDPIP6LEN(n)      (((n) == 18) || ((n) == 22))
 #define IPXLEN               10
 #define IPXSOCKLEN           12
 #define MACLEN               6
@@ -176,10 +176,10 @@ public:
      */
     ~Address() override { }
 
-    /// overloaded equivlence operator, are two addresses equal?
+    /// overloaded equivalence operator, are two addresses equal?
     DLLOPT friend bool operator==(const Address& lhs, const Address& rhs);
 
-    /// overloaded not equivlence operator, are two addresses not equal?
+    /// overloaded not equivalence operator, are two addresses not equal?
     DLLOPT friend bool operator!=(const Address& lhs, const Address& rhs)
     {
         return !(lhs == rhs);
@@ -211,10 +211,10 @@ public:
         return false;
     }
 
-    /// equivlence operator overloaded, are an address and a string equal?
+    /// equivalence operator overloaded, are an address and a string equal?
     DLLOPT friend bool operator==(const Address& lhs, const char* rhs);
 
-    /// overloaded not equivlence operator, are an address and string not
+    /// overloaded not equivalence operator, are an address and string not
     /// equal?
     DLLOPT friend bool operator!=(const Address& lhs, const char* rhs)
     {
@@ -515,7 +515,7 @@ public:
     /**
      * Map a IPv4 address to a IPv6 address.
      *
-     * @return - true if no error occured.
+     * @return - true if no error occurred.
      */
     virtual bool map_to_ipv6();
 
@@ -727,7 +727,7 @@ public:
     /**
      * Map a IPv4 UDP address to a IPv6 UDP address.
      *
-     * @return - true if no error occured.
+     * @return - true if no error occurred.
      */
     bool map_to_ipv6() override;
 
@@ -1279,14 +1279,14 @@ public:
 
     /**
      * Access the protected address.
-     * The caller must make sure that this GenAddress object ist valid()
+     * The caller must make sure that this GenAddress object is valid()
      * and is of the right type (get_type()).
      */
     const IpAddress& cast_ipaddress() const { return (IpAddress&)*address; }
 
     /**
      * Access the protected address.
-     * The caller must make sure that this GenAddress object ist valid()
+     * The caller must make sure that this GenAddress object is valid()
      * and is of the right type (get_type()).
      */
     const UdpAddress& cast_udpaddress() const { return (UdpAddress&)*address; }
@@ -1294,7 +1294,7 @@ public:
 #ifdef _MAC_ADDRESS
     /**
      * Access the protected address.
-     * The caller must make sure that this GenAddress object ist valid()
+     * The caller must make sure that this GenAddress object is valid()
      * and is of the right type (get_type()).
      */
     const MacAddress& cast_macaddress() const { return (MacAddress&)*address; }
@@ -1303,14 +1303,14 @@ public:
 #ifdef _IPX_ADDRESS
     /**
      * Access the protected address.
-     * The caller must make sure that this GenAddress object ist valid()
+     * The caller must make sure that this GenAddress object is valid()
      * and is of the right type (get_type()).
      */
     const IpxAddress& cast_ipxaddress() const { return (IpxAddress&)*address; }
 
     /**
      * Access the protected address.
-     * The caller must make sure that this GenAddress object ist valid()
+     * The caller must make sure that this GenAddress object is valid()
      * and is of the right type (get_type()).
      */
     const IpxSockAddress& cast_ipxsockaddress() const

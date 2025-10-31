@@ -231,7 +231,7 @@ Changes snmp++v3.2.24
 - Fixed: Bug in Snmp::stop_poll_thread() could lead to crash at
   application exit.
 - Improved: Snmp class will no longer send snmpv3 message if all of
-  the following is true: a) engine id discovery is diabled. b) local
+  the following is true: a) engine id discovery is disabled. b) local
   entity is not authoritative. c) engine id is not set in target.
   In this case an invalid target error is returned.
 - Improved: snmp++ used select() syscall. On most unix like systems
@@ -336,7 +336,7 @@ Changes snmp++v3.2.18
 =====================
 
 - Added: Privacy protocol 3DES. The Auth/Priv interface was
-  modifed. (based on patch from Pierre Pacchioni)
+  modified. (based on patch from Pierre Pacchioni)
 - Fixed: Possible memory leak in mp_v3.cpp v3MP::snmp_parse(..).
 - Fixed: Uninitialized variable in asn1.cpp asn_parse_length(..).
 - Fixed: Uninitialized variables in snmpmsg.cpp 
@@ -469,7 +469,7 @@ Changes snmp++v3.2.11
   (Fabrice Bacchella)
 - Improved: declared some methods as const
 - Improved: Moved the headers to include/snmp_pp/
-  to avoid name colissions.
+  to avoid name collisions.
 - Improved: QtExample can receive traps/informs.
 - Fixed: Compilation problems with BC++ 5.0
   (Vinoth, Christian Cheney)
@@ -721,7 +721,7 @@ Changes snmp++v3.2
 - Added: clear() method to SnmpCollection
 - Fixed: added clone() method to Pdu class, so
   SnmpCollection<Pdu> will work again.
-- Added: Make notify socket decriptor available in
+- Added: Make notify socket descriptor available in
   Snmp class (Don Dietz)
 
 Changes snmp++v3.1.6c
@@ -1186,7 +1186,7 @@ Changes snmp++v3.0:
 
   For SNMPv3 there is only one valid security_model (SNMP_SECURITY_MODEL_USM).
   If you set the security_model to SNMP_SECURITY_MODEL_V1 (or V2) you can use
-  te UTarget to send SNMPv1 (v2c) requests.
+  the UTarget to send SNMPv1 (v2c) requests.
 
 - New methods for Pdu objects:
 

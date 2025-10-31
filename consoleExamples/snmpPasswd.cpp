@@ -76,9 +76,9 @@ void KeyChange(Snmp* snmp, Pdu& myPdu, const OctetStr& user,
             std::cout << std::flush << std::endl
                       << "Oid = " << vb4.get_printable_oid() << std::endl
                       << "Value = " << vb4.get_printable_value() << std::endl;
-            int resul = usm->key_update_commit(uku, USM_PasswordAllKeyUpdate);
+            int result = usm->key_update_commit(uku, USM_PasswordAllKeyUpdate);
             std::cout << std::endl
-                      << "result of local key update: " << resul << std::endl;
+                      << "result of local key update: " << result << std::endl;
         }
     }
     else

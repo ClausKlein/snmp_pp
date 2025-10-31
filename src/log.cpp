@@ -122,7 +122,7 @@ void LogEntry::init()
 #            ifdef _WIN32
     typedef long pid_t;
 #            endif
-    pid_t        pid = _getpid();
+    pid_t pid = _getpid();
 #        else
     long pid = 0;
 #        endif
@@ -309,8 +309,8 @@ AgentLog::AgentLog()
 #if defined(WITH_LOG_PROFILES)
 void AgentLog::set_profile(const char* const logprofile)
 {
-    int*       log_profile;
-    auto const item = logfilter_profiles.find(logprofile);
+    int*       log_profile = nullptr;
+    auto const item        = logfilter_profiles.find(logprofile);
 
     if (item != logfilter_profiles.end())
     {

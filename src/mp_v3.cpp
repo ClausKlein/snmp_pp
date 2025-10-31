@@ -589,7 +589,7 @@ void v3MP::Cache::delete_entry(uint32_t req_id, bool local_request)
     return;
 }
 
-// Delete the entry with the given request ans message id from the cache.
+// Delete the entry with the given request and message id from the cache.
 void v3MP::Cache::delete_entry(uint32_t req_id, int msg_id, bool local_request)
 {
     if (!table)
@@ -826,9 +826,9 @@ int v3MP::send_report(unsigned char* scopedPDU, int scopedPDULength,
                 debugprintf(0, "mp: Error while trying to parse PDU!");
             }
         } // end of: if (data == NULL)
-    }     // end if (scopedPDULength != MAX_SNMP_PACKET)
+    } // end if (scopedPDULength != MAX_SNMP_PACKET)
     else
-    {     // scopedPDULength == MAX_SNMP_PACKET
+    { // scopedPDULength == MAX_SNMP_PACKET
         cEngineID[0]    = '\0';
         cEngineIDLength = 0;
         cName[0]        = '\0';
@@ -1156,7 +1156,7 @@ int v3MP::snmp_parse(Snmp* snmp_session, struct snmp_pdu* pdu,
     default: {
         snmpUnknownSecurityModels++;
         usm->delete_sec_state_reference(securityStateReference);
-        debugprintf(0, "SecurityModel of incomming Message not supported!");
+        debugprintf(0, "SecurityModel of incoming Message not supported!");
         // Message should be dropped without a report
         return SNMPv3_MP_UNSUPPORTED_SECURITY_MODEL;
     }
@@ -1222,7 +1222,7 @@ int v3MP::snmp_parse(Snmp* snmp_session, struct snmp_pdu* pdu,
     {
         if ((reportableFlag) && (errorCode != SNMPv3_USM_PARSE_ERROR))
         {
-            // error occured: prepare reportpdu in agent
+            // error occurred: prepare reportpdu in agent
             cache.add_entry(msgID, pdu->reqid, securityEngineID,
                 msgSecurityModel, securityName, securityLevel, "", "",
                 securityStateReference, errorCode, CACHE_REMOTE_REQ);

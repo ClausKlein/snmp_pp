@@ -111,7 +111,7 @@ void CSNMPMessage::SetSendTime()
 
     // Kludge: When this was first designed the units were millisecs
     // However, later on the units for the target class were changed
-    // to hundreths of secs.  Multiply the hundreths of secs by 10
+    // to hundredths of secs.  Multiply the hundredths of secs by 10
     // to create the millisecs which the rest of the objects use.
     // 11-Dec-95 TM
     m_sendTime += (m_target->get_timeout() * 10);
@@ -398,7 +398,8 @@ int CSNMPMessageQueue::DeleteEntry(const uint32_t uniqueId)
 {
     bool loopAgain = false;
 
-    do {
+    do
+    {
         loopAgain                       = false;
         CSNMPMessageQueueElt* msgEltPtr = m_head.GetNext();
 
@@ -621,7 +622,8 @@ int CSNMPMessageQueue::HandleEvents(
 
             CSNMPMessage* msg = 0;
             bool          redoGetEntry;
-            do {
+            do
+            {
                 redoGetEntry = false;
                 lock();
                 // find the corresponding msg in the message queue
@@ -756,7 +758,8 @@ int CSNMPMessageQueue::HandleEvents(const int maxfds, const fd_set& readfds,
 
             CSNMPMessage* msg          = nullptr;
             bool          redoGetEntry = false;
-            do {
+            do
+            {
                 redoGetEntry = false;
                 lock(); // FIXME: not exception save! CK
                 // find the corresponding msg in the message queue
@@ -834,7 +837,7 @@ int CSNMPMessageQueue::HandleEvents(const int maxfds, const fd_set& readfds,
             }
             unlock();
         } // if socket has data
-    }     // for all sockets
+    } // for all sockets
     return SNMP_CLASS_SUCCESS;
 }
 

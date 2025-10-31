@@ -47,7 +47,7 @@
  * DESIGN + AUTHOR:  Peter E Mellquist
  *
  * DESCRIPTION:
- * Class implentation for SMI Timeticks class.
+ * Class implementation for SMI Timeticks class.
  * =====================================================================*/
 
 #include "snmp_pp/timetick.h" // include header file for timetick class
@@ -65,7 +65,7 @@ SnmpSyntax& TimeTicks::operator=(const SnmpSyntax&in_val)
 {
     if (this == &in_val)
     {
-        return *this;           // handle assignement from itself
+        return *this;           // handle assignment from itself
     }
     valid_flag = false;         // will get set true if really valid
     if (in_val.valid())

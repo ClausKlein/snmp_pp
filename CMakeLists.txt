@@ -1,11 +1,11 @@
-cmake_minimum_required(VERSION 3.21...3.27)
+cmake_minimum_required(VERSION 3.25...4.2)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # NOTE: We need LANGUAGE C too for libdes. It may be required to build at Windows! CK
 project(
   snmp_pp
-  VERSION 3.4.7.14
+  VERSION 3.4.7.16
   LANGUAGES CXX C
 )
 
@@ -18,8 +18,14 @@ include(CheckTypeSize)
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
 
+if(CMAKE_EXPORT_COMPILE_COMMANDS)
+  set(CMAKE_CXX_STANDARD_INCLUDE_DIRECTORIES ${CMAKE_CXX_IMPLICIT_INCLUDE_DIRECTORIES})
+endif()
+
 # =======================================
-set(CMAKE_CXX_STANDARD 17)
+if(NOT DEFINED CMAKE_CXX_STANDARD)
+  set(CMAKE_CXX_STANDARD 17)
+endif()
 # =======================================
 # NOTE: in consideration of std=c++17! CK
 set(CNF_STDCXX_98_HEADERS YES)
@@ -28,19 +34,17 @@ set(SNMP_PP_NAMESPACE ON) # "Enable using of namespace (needed!)" ON)
 set(SNMP_PP_SNMPv3 ON) # "Enable support for SNMPv3 (needed!)" ON)
 set(SNMP_PP_THREADS ON) # "Enable support for threads (needed!)" ON)
 
-if(NOT PROJECT_IS_TOP_LEVEL)
-  option(CMAKE_SKIP_INSTALL_RULES "Whether to disable generation of installation rules" YES)
-endif()
-
 option(SNMP_PP_EXAMPLES "Enable to build examples" ON)
 option(SNMP_PP_EXTENDED_DEBUG "Enable additional debug messages" OFF)
 option(SNMP_PP_IPXADDR "Enable IpxAddress class" OFF)
 option(SNMP_PP_IPv6 "Enable support for IPv6" ON)
 option(SNMP_PP_LIBDES "Search for DES library (At least needed for Windows!)" ON)
 option(SNMP_PP_LIBTOMCRYPT "Search for Tomcrypt library" OFF)
-option(SNMP_PP_LOGGING "Enable logging" ${PROJECT_IS_TOP_LEVEL})
+option(SNMP_PP_LOGGING "Enable logging" OFF)
 option(SNMP_PP_MACADDR "Enable MacAddress class" OFF)
 option(SNMP_PP_OPENSSL "Search for OpenSSL library" ON)
+
+include(Features.cmake)
 
 if(SNMP_PP_LOGGING)
   set(LogProfile
@@ -94,6 +98,8 @@ set(HAVE_PTHREAD ${CNF_HAVE_PTHREAD_H})
 
 check_function_exists("strcasecmp" CNF_HAVE_STRCASECMP)
 check_function_exists("stricmp" CNF_HAVE_STRICMP)
+check_function_exists("strlcpy" HAVE_STRLCPY)
+check_function_exists("strlcat" HAVE_STRLCAT)
 check_function_exists("getpid" CNF_HAVE_GETPID)
 set(HAVE_GETPID ${CNF_HAVE_GETPID})
 set(HAVE_STRCASECMP ${CNF_HAVE_STRCASECMP})
@@ -254,7 +260,7 @@ else()
   set(_DEBUG 0)
 endif()
 
-option(USE_OUTPUT_PATH "build all libaries and runtime files at the bin directory" YES)
+option(USE_OUTPUT_PATH "build all libraries and runtime files at the bin directory" YES)
 if(USE_OUTPUT_PATH)
   set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
   set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
@@ -265,8 +271,9 @@ endif()
 # see https://github.com/cpm-cmake/CPM.cmake for more info
 
 include(CPM)
+CPMUsePackageLock(package-lock.cmake)
 
-CPMAddPackage("gh:aminya/project_options@0.32.2")
+CPMAddPackage("gh:aminya/project_options@0.41.0")
 list(APPEND CMAKE_MODULE_PATH ${ProjectOptions_SRC_DIR})
 
 if(SNMP_PP_OPENSSL)
@@ -452,47 +459,19 @@ set(MY_SRC_FILES
     src/vb.cpp
 )
 
-option(BUILD_SHARED_LIBS "Global flag to cause add_library() to create shared libraries if on." YES)
-
-if(APPLE)
-  set(OPTION_ENABLED_SANITIZER
-      "ENABLE_SANITIZER_ADDRESS; ENABLE_SANITIZER_UNDEFINED_BEHAVIOR"
-      CACHE STRING "Enabled sanitizer for debug build"
-  )
-else()
-  set(OPTION_ENABLED_SANITIZER
-      "ENABLE_SANITIZER_MEMORY"
-      CACHE STRING "Enabled sanitizer for debug build"
-  )
-endif()
-option(OPTION_ENABLE_COVERAGE "Enable test coverage of projects" OFF)
-if(OPTION_ENABLE_COVERAGE)
-  set(ENABLE_COVERAGE "ENABLE_COVERAGE")
-endif()
-
-if(SNMP_PP_LOGGING)
-  set(OPTION_ENABLE_UNITY
-      OFF
-      CACHE STRING "forced" FORCE
-  )
-else()
-  option(OPTION_ENABLE_UNITY "Enable Unity builds of projects" ON)
-endif()
-
-if(OPTION_ENABLE_UNITY)
-  set(ENABLE_UNITY "ENABLE_UNITY")
-endif()
-
 project_options(
   PREFIX
   ${PROJECT_NAME}
   ENABLE_CACHE
+  ENABLE_VS_ANALYSIS
   ${ENABLE_COVERAGE}
   ${OPTION_ENABLED_SANITIZER}
   #XXX ENABLE_SANITIZER_ADDRESS
-  #XXX ENABLE_SANITIZER_UNDEFINED_BEHAVIOR
+  #XXX ENABLE_SANITIZER_UNDEFINED
   #XXX ENABLE_SANITIZER_THREAD
   #XXX ENABLE_SANITIZER_MEMORY
+  # ENABLE_STACK_PROTECTION
+  # ENABLE_OVERFLOW_PROTECTION
   # TODO: WARNINGS_AS_ERRORS
 )
 
@@ -500,18 +479,17 @@ set(PROJECT_EXPORT_HEADER ${PROJECT_NAME}/export.h)
 add_library(${PROJECT_NAME} ${MY_HEADER_FILES} ${MY_HEADER_LIB_FILES} ${CMAKE_CURRENT_BINARY_DIR}/config.h ${MY_SRC_FILES})
 
 if(CMAKE_SKIP_INSTALL_RULES)
+  # NOTE: we need to generate header if packageProject() is not called:
   include(GenerateExportHeader)
   generate_export_header(
     ${PROJECT_NAME} EXPORT_FILE_NAME ${CMAKE_CURRENT_BINARY_DIR}/PackageProjectInclude/${PROJECT_EXPORT_HEADER}
   )
   add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
-  target_link_libraries(${PROJECT_NAME} PUBLIC ${PROJECT_NAME}_project_options ${PROJECT_NAME}_project_warnings)
 
-  # target_link_libraries(
-  #   ${PROJECT_NAME} PRIVATE $<BUILD_LOCAL_INTERFACE:${PROJECT_NAME}_project_options>
-  #                           $<BUILD_LOCAL_INTERFACE:${PROJECT_NAME}_project_warnings>
-  # )
+  # NOTE: project_options are only used if the project is not installed!
+  target_link_libraries(${PROJECT_NAME} PUBLIC ${PROJECT_NAME}_project_options ${PROJECT_NAME}_project_warnings)
 endif()
+
 set_target_properties(${PROJECT_NAME} PROPERTIES UNITY_BUILD ${OPTION_ENABLE_UNITY})
 
 if(MSVC)
@@ -531,7 +509,7 @@ set_target_properties(
   ${PROJECT_NAME} PROPERTIES VERSION ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}
                              SOVERSION ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
 )
-set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD ${CMAKE_CXX_STANDARD})
+set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 17)
 target_link_libraries(${PROJECT_NAME} PUBLIC ${CRYPTO_LINKLIBS} Threads::Threads)
 target_compile_definitions(${PROJECT_NAME} PRIVATE HAVE_CONFIG_H)
 
@@ -548,7 +526,7 @@ target_include_directories(
          $<INSTALL_INTERFACE:include>
 )
 
-# Note: for SameMajorVersion upgrade stategy
+# Note: for SameMajorVersion upgrade strategy
 set_target_properties(
   ${PROJECT_NAME}
   PROPERTIES SOVERSION ${PROJECT_VERSION_MAJOR}
@@ -598,9 +576,11 @@ if(CMAKE_SKIP_INSTALL_RULES)
   return()
 endif()
 
+include(AddUninstallTarget)
+
 install(FILES ${MY_HEADER_LIB_FILES} DESTINATION include)
 
-CPMAddPackage("gh:TheLartians/PackageProject.cmake@1.11.0")
+CPMAddPackage("gh:TheLartians/PackageProject.cmake@1.13.0")
 packageProject(
   # the name of the target to export
   NAME ${PROJECT_NAME}

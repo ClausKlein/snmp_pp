@@ -83,7 +83,7 @@ public:
     msec(const msec& in_msec) : m_time(in_msec.m_time), m_changed(true) { }
 
     /**
-     * Constructor using seconds and milli sconds.
+     * Constructor using seconds and milli seconds.
      *
      * @param sec    - Seconds
      * @param milsec - Milli seconds

@@ -98,7 +98,7 @@ CNotifyEvent::CNotifyEvent(
     Snmp* snmp, const OidCollection& trapids, const TargetCollection& targets)
     : m_snmp(snmp)
 {
-    // create new collections using parms passed in
+    // create new collections using params passed in
     notify_ids     = new OidCollection(trapids);
     notify_targets = new TargetCollection(targets);
 }
@@ -181,11 +181,11 @@ int CNotifyEvent::notify_filter(const Oid& trapid, SnmpTarget& target) const
                                 if (((dynamic_cast<UTarget*>(&target))
                                             ->get_security_name()
                                         == (dynamic_cast<UTarget*>(tmptarget))
-                                               ->get_security_name())
+                                            ->get_security_name())
                                     && ((dynamic_cast<UTarget*>(&target))
                                             ->get_security_model()
                                         == (dynamic_cast<UTarget*>(tmptarget))
-                                               ->get_security_model()))
+                                            ->get_security_model()))
                                 {
                                     target_matches = true;
                                     break;
@@ -233,10 +233,10 @@ int CNotifyEvent::notify_filter(const Oid& trapid, SnmpTarget& target) const
                                             == target.get_version())
                                         && (OctetStr((dynamic_cast<CTarget*>(
                                                           &target))
-                                                         ->get_readcommunity())
+                                                    ->get_readcommunity())
                                             == (dynamic_cast<UTarget*>(
                                                     tmptarget))
-                                                   ->get_security_name()))
+                                                ->get_security_name()))
                                     {
                                         target_matches = true;
                                         break;
@@ -245,7 +245,7 @@ int CNotifyEvent::notify_filter(const Oid& trapid, SnmpTarget& target) const
                             }
                         }
                     } // end if (add_equal)
-                }     // end if tmpaddr.valid()...
+                } // end if tmpaddr.valid()...
             }
         }
     }
@@ -408,7 +408,7 @@ int CNotifyEventQueue::AddEntry(
             (m_notify_addr.get_ip_version() == Address::version_ipv4);
         if (is_v4_address)
         {
-            struct sockaddr_in mgr_addr { };
+            struct sockaddr_in mgr_addr {};
 
             // open a socket to be used for the session
             if ((m_notify_fd = socket(AF_INET, SOCK_DGRAM, 0)) < 0)
@@ -448,12 +448,11 @@ int CNotifyEventQueue::AddEntry(
             setCloseOnExecFlag(m_notify_fd);
 
             // set up the manager socket attributes
-            uint32_t const inaddr =
-                inet_addr(IpAddress(m_notify_addr)
-                              .get_printable()); // TODO: Use inet_pton()! CK
+            uint32_t const inaddr = inet_addr(IpAddress(m_notify_addr)
+                    .get_printable());         // TODO: Use inet_pton()! CK
             memset(&mgr_addr, 0, sizeof(mgr_addr));
             mgr_addr.sin_family      = AF_INET;
-            mgr_addr.sin_addr.s_addr = inaddr;   // was htonl( INADDR_ANY);
+            mgr_addr.sin_addr.s_addr = inaddr; // was htonl( INADDR_ANY);
             mgr_addr.sin_port        = htons(m_notify_addr.get_port());
 #ifdef CYGPKG_NET_OPENBSD_STACK
             mgr_addr.sin_len = sizeof(mgr_addr);
@@ -590,7 +589,7 @@ int CNotifyEventQueue::AddEntry(
 #    endif
 
             // set up the manager socket attributes
-            struct sockaddr_in6 mgr_addr { };
+            struct sockaddr_in6 mgr_addr {};
             memset(&mgr_addr, 0, sizeof(mgr_addr));
 
             unsigned int scope = 0;
@@ -848,7 +847,7 @@ int CNotifyEventQueue::HandleEvents(
                 notifyEltPtr->GetNotifyEvent()->Callback(
                     *target, pdu, m_notify_fd, status);
                 notifyEltPtr = notifyEltPtr->GetNext();
-            }       // for each snmp object
+            } // for each snmp object
         }
         if (target) // receive_snmp_notification calls new
         {
@@ -892,7 +891,7 @@ int CNotifyEventQueue::HandleEvents(const int /*maxfds*/,
     Pdu         pdu;
     SnmpTarget* target = nullptr;
 
-    // pull the notifiaction off the socket
+    // pull the notification off the socket
     if (FD_ISSET(m_notify_fd, (fd_set*)&readfds))
     {
         status = receive_snmp_notification(
@@ -917,7 +916,7 @@ int CNotifyEventQueue::HandleEvents(const int /*maxfds*/,
                 notifyEltPtr->GetNotifyEvent()->Callback(
                     *target, pdu, m_notify_fd, status);
                 notifyEltPtr = notifyEltPtr->GetNext();
-            }       // for each snmp object
+            } // for each snmp object
         }
         if (target) // receive_snmp_notification calls new
         {

@@ -129,7 +129,8 @@ namespace Snmp_pp
             | ((uint32_t)(unsigned char)(cp)[1]))
 
 #    define PUT_32BIT(cp, value)     \
-        do {                         \
+        do                           \
+        {                            \
             (cp)[0] = (value) >> 24; \
             (cp)[1] = (value) >> 16; \
             (cp)[2] = (value) >> 8;  \
@@ -137,7 +138,8 @@ namespace Snmp_pp
         } while (0)
 
 #    define PUT_16BIT(cp, value)    \
-        do {                        \
+        do                          \
+        {                           \
             (cp)[0] = (value) >> 8; \
             (cp)[1] = (value);      \
         } while (0)
@@ -155,7 +157,8 @@ namespace Snmp_pp
             | ((uint32_t)(unsigned char)(cp)[1] << 8))
 
 #    define PUT_32BIT_LSB_FIRST(cp, value) \
-        do {                               \
+        do                                 \
+        {                                  \
             (cp)[0] = (value);             \
             (cp)[1] = (value) >> 8;        \
             (cp)[2] = (value) >> 16;       \
@@ -163,7 +166,8 @@ namespace Snmp_pp
         } while (0)
 
 #    define PUT_16BIT_LSB_FIRST(cp, value) \
-        do {                               \
+        do                                 \
+        {                                  \
             (cp)[0] = (value);             \
             (cp)[1] = (value) >> 8;        \
         } while (0)

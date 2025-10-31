@@ -559,7 +559,7 @@ int main(int argc, char** argv)
                 || (vb.get_syntax() == sNMP_SYNTAX_NOSUCHINSTANCE)
                 || (vb.get_syntax() == sNMP_SYNTAX_NOSUCHOBJECT))
             {
-                std::cout << "Exception: " << vb.get_syntax() << " occured."
+                std::cout << "Exception: " << vb.get_syntax() << " occurred."
                           << std::endl;
             }
         }

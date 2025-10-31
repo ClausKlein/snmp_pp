@@ -53,7 +53,7 @@
  *    DESIGN + AUTHOR:        Tom Murray
  *
  *    DESCRIPTION:
- *      Queue for holding sessions waiting for notifiactions
+ *      Queue for holding sessions waiting for notifications
  *
  * =====================================================================*/
 
@@ -91,7 +91,7 @@ class EventListHolder;
 
 /*----------------------------------------------------------------*/
 /* CNotifyEvent                                                   */
-/*   a description of a sessions waiting for async notifiactions. */
+/*   a description of a sessions waiting for async notifications. */
 /*----------------------------------------------------------------*/
 class DLLOPT CNotifyEvent {
 public:
@@ -151,7 +151,7 @@ public:
     int DoRetries(const msec& /*sendtime*/) override
     {
         return 0;
-    }                                 // nothing to retry
+    } // nothing to retry
 
     int Done() override { return 0; } // we are never done
 

@@ -269,7 +269,7 @@ int main(int argc, char** argv)
         }
     }
 
-    // print out all addressess
+    // print out all addresses
     std::cout << "Found " << filtered_addrs.size() << " agents." << std::endl;
     for (int m = 0; m < filtered_addrs.size(); ++m)
     {

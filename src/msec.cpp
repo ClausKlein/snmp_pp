@@ -66,8 +66,8 @@ namespace Snmp_pp
 #endif
 
 #if defined _THREADS && !defined HAVE_LOCALTIME_R \
-    && !defined                  HAVE_REENTRANT_LOCALTIME
-SnmpSynchronized                 msec::m_localtime_mutex;
+    && !defined HAVE_REENTRANT_LOCALTIME
+SnmpSynchronized msec::m_localtime_mutex;
 #endif
 
 int operator==(const msec& t1, const msec& t2)
@@ -284,10 +284,10 @@ const char* msec::get_printable() const
         nc_this->m_output_buffer, sizeof(m_output_buffer), "%H:%M:%S.", &stm);
 #else
 #    if defined _THREADS && !defined HAVE_LOCALTIME_R \
-        && !defined                  HAVE_REENTRANT_LOCALTIME
+        && !defined HAVE_REENTRANT_LOCALTIME
     SnmpSynchronize s(m_localtime_mutex); // Serialize all calls to localtime!
 #    endif
-    struct tm*      tmptr;
+    struct tm* tmptr;
     tmptr = localtime((time_t*)&m_time.tv_sec);
     strftime(
         nc_this->m_output_buffer, sizeof(m_output_buffer), "%H:%M:%S.", tmptr);

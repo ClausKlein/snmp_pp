@@ -12,10 +12,9 @@ export CPM_SOURCE_CACHE=${HOME}/.cache/CPM
 
 MACHINE:=$(shell uname -m)
 PROJECT_NAME:=$(shell basename $(CURDIR))
+CPPFILES:=$(shell git ls-files ::*.cpp)
 
-MACHINE:=$(shell uname -m)
-PROJECT_NAME:=$(shell basename $(CURDIR))
-BUILD_DIR?=../build-$(PROJECT_NAME)-$(MACHINE)-$(BUILD_TYPE)
+BUILD_DIR?=./build-$(PROJECT_NAME)-$(MACHINE)-$(BUILD_TYPE)
 
 
 .PHONY: all build test install check clean distclean format
@@ -32,15 +31,16 @@ install: test
 build: $(BUILD_DIR)
 build: $(BUILD_DIR)/compile_commands.json
 $(BUILD_DIR)/compile_commands.json: GNUmakefile CMakeLists.txt
-	cmake -B $(BUILD_DIR) -S . -G Ninja -D CMAKE_SKIP_INSTALL_RULES=YES -D OPTION_ENABLE_COVERAGE=YES -D SNMP_PP_LOGGING=NO
+	cmake -B $(BUILD_DIR) -S . -G Ninja -D CMAKE_SKIP_INSTALL_RULES=YES -D OPTION_ENABLE_COVERAGE=YES -D SNMP_PP_LOGGING=NO -D OPTION_ENABLE_UNITY=NO
 	perl -i.bak -p -e 's#-W[-\w=\d]+\b##g;' -e 's#-I(${CPM_SOURCE_CACHE})#-isystem $$1#g;' $(BUILD_DIR)/compile_commands.json
 
 $(BUILD_DIR):
 	mkdir -p $@ gcovr
 
 check: $(BUILD_DIR)/compile_commands.json
-	#XXX run-clang-tidy -p $(BUILD_DIR) -checks='-*,hicpp-named-parameter,modernize-loop-convert,modernize-return-braced-init-list,modernize-deprecated-headers,modernize-redundant-void-arg,modernize-use-bool-literals,modernize-use-auto,modernize-use-nullptr,misc-const-correctness,cppcoreguidelines-explicit-virtual-functions,readability-inconsistent-declaration-parameter-name,-cppcoreguidelines-pro-type-*cast' -j1 -fix .
-	run-clang-tidy -p $(BUILD_DIR) -checks='-clang-analyzer-optin.*,-hicpp-multiway-paths-covered,-*-use-equals-delete' .
+	#DONE: run-clang-tidy -p $(BUILD_DIR) -checks='-*,bugprone-macro-parentheses' -fix -j1 $(CPPFILES)
+	#TODO: run-clang-tidy -p $(BUILD_DIR) -checks='-*,google-readability-casting' -fix -j1 $(CPPFILES)
+	run-clang-tidy -p $(BUILD_DIR) $(CPPFILES)
 
 clean:
 	rm -f include/snmp_pp/config_snmp_pp.h
@@ -49,12 +49,10 @@ clean:
 	-ninja -C $(BUILD_DIR) clean
 
 distclean: clean
-	rm -rf $(BUILD_DIR) build
+	rm -rf $(BUILD_DIR) build*
 
 format: distclean
-	find . -name CMakeLists.txt | xargs cmake-format -i
-	find . -type f -name '*.cmake' | xargs cmake-format -i
-	find . -type f -name '*.cpp' | xargs clang-format -i
-	find . -type f -name '*.h' | xargs clang-format -i
-	find . -type f \( -name '*.cpp' -o -name '*.h' \) | xargs grep  --color '\/\/ BEGIN=' || echo OK
+	-git ls-files ::*.cmake ::*CMakeLists.txt | xargs cmake-format -i
+	git ls-files ::*.cpp ::*.h ::*.json | xargs clang-format -i
+	git ls-files ::*.cpp ::*.h | xargs grep  --color '\/\/ BEGIN=' || echo OK
 

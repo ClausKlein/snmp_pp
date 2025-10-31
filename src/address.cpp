@@ -168,7 +168,7 @@ bool operator<(const Address& lhs, const Address& rhs)
 }
 
 //------------------------------------------------------------------
-// equivlence operator overloaded, are an address and a string equal?
+// equivalence operator overloaded, are an address and a string equal?
 bool operator==(const Address& lhs, const char* rhs)
 {
     ADDRESS_TRACE2;
@@ -260,7 +260,7 @@ bool operator<=(const Address& lhs, const char* rhs)
 //============ IPAddress Implementation ===============================
 //=====================================================================
 
-//-------[ construct an IP address with no agrs ]----------------------
+//-------[ construct an IP address with no args ]----------------------
 IpAddress::IpAddress()
     : Address(), iv_friendly_name_status(0), ip_version(version_ipv4),
       have_ipv6_scope(false)
@@ -651,15 +651,15 @@ int IpAddress::parse_dotted_ipstring(const char* inaddr)
     return true;
 }
 
-#define ATOI(x)                       \
-    if ((x >= 48) && (x <= 57))       \
-        x = x - 48; /* 0-9 */         \
-    else if ((x >= 97) && (x <= 102)) \
-        x = x - 87; /* a-f */         \
-    else if ((x >= 65) && (x <= 70))  \
-        x = x - 55; /* A-F */         \
-    else                              \
-        x = 0
+#define ATOI(x)                           \
+    if (((x) >= 48) && ((x) <= 57))       \
+        (x) = (x) - 48; /* 0-9 */         \
+    else if (((x) >= 97) && ((x) <= 102)) \
+        (x) = (x) - 87; /* a-f */         \
+    else if (((x) >= 65) && ((x) <= 70))  \
+        (x) = (x) - 55; /* A-F */         \
+    else                                  \
+        (x) = 0
 
 // parse a coloned string
 int IpAddress::parse_coloned_ipstring(const char* inaddr)
@@ -985,8 +985,7 @@ bool IpAddress::parse_address(const char* inaddr)
         return true; // since this is a valid ipv6 string don't do any DNS
     }
 #ifdef HAVE_GETADDRINFO
-    struct addrinfo hints {
-    }, *res = nullptr;
+    struct addrinfo hints {}, *res = nullptr;
     // XXX ensure that MAX_FRIENDLY_NAME keeps greater than INET6_ADDRSTRLEN
     char ds[MAX_FRIENDLY_NAME];
 
@@ -1060,7 +1059,7 @@ bool IpAddress::parse_address(const char* inaddr)
     char ds[61];
 
 #    if defined(CPU) && CPU == PPC603
-    int  lookupResult = hostGetByName(inaddr);
+    int lookupResult = hostGetByName(inaddr);
 
     if (lookupResult == ERROR)
     {
@@ -1083,9 +1082,9 @@ bool IpAddress::parse_address(const char* inaddr)
     hostent* lookupResult = 0;
 
 #        ifdef HAVE_GETHOSTBYNAME_R
-    char     buf[2048]; // TODO: Too big buffer?
-    int      herrno = 0;
-    hostent  lookup_buf;
+    char    buf[2048]; // TODO: Too big buffer?
+    int     herrno = 0;
+    hostent lookup_buf;
 #            if defined(__sun) || defined(__QNX_NEUTRINO)
     lookupResult = gethostbyname_r(inaddr, &lookup_buf, buf, 2048, &herrno);
 #            else
@@ -1215,10 +1214,9 @@ int IpAddress::addr_to_friendly()
     }
 
 #ifdef HAVE_GETADDRINFO
-    struct addrinfo hints {
-    }, *res = nullptr;
-    int  error = 0;
-    char ds[MAX_FRIENDLY_NAME];
+    struct addrinfo hints {}, *res = nullptr;
+    int             error = 0;
+    char            ds[MAX_FRIENDLY_NAME];
 
     strlcpy(ds, this->IpAddress::get_printable(), sizeof(ds));
     memset(&hints, 0, sizeof(hints));
@@ -1257,12 +1255,12 @@ int IpAddress::addr_to_friendly()
 #    endif
 
 #    if defined(CPU) && CPU == PPC603
-    int             lookupResult;
-    char            hName[MAXHOSTNAMELEN + 1];
+    int  lookupResult;
+    char hName[MAXHOSTNAMELEN + 1];
 #    else
     hostent* lookupResult;
 #    endif
-    char            ds[61];
+    char ds[61];
 
     // lets try and get the friendly name from the DNS
     strlcpy(
@@ -1277,7 +1275,7 @@ int IpAddress::addr_to_friendly()
     {
         in_addr ipAddr {};
 
-#    if defined   HAVE_INET_ATON
+#    if defined HAVE_INET_ATON
         if (inet_aton((char*)ds, &ipAddr) == 0)
         {
             return -1; // bad address
@@ -1307,7 +1305,7 @@ int IpAddress::addr_to_friendly()
 #        endif
 #    else
         lookupResult = gethostbyaddr((char*)&ipAddr, sizeof(in_addr),
-            AF_INET);                         // TODO: Use getaddrinfo()! CK
+            AF_INET); // TODO: Use getaddrinfo()! CK
 #    endif
     }
     else
@@ -1573,7 +1571,7 @@ void IpAddress::clear()
 //========== Udp Address Implementation =================================
 //=======================================================================
 
-//-------[ construct an IP address with no agrs ]----------------------
+//-------[ construct an IP address with no args ]----------------------
 UdpAddress::UdpAddress() : IpAddress()
 {
     ADDRESS_TRACE;
@@ -2116,7 +2114,7 @@ bool UdpAddress::set_scope(const unsigned int scope)
 /**
  * Map a IPv4 UDP address to a IPv6 UDP address.
  *
- * @return - true if no error occured.
+ * @return - true if no error occurred.
  */
 bool UdpAddress::map_to_ipv6()
 {
@@ -2323,7 +2321,7 @@ bool IpxAddress::parse_address(const char* inaddr)
     char unsigned* tmp;
     size_t         z, tmplen;
 
-    // save the orginal source
+    // save the original source
     if (!inaddr || (strlen(inaddr) >= sizeof(temp)))
     {
         return false;
@@ -2907,7 +2905,7 @@ bool MacAddress::parse_address(const char* inaddr)
     char unsigned* tmp;
     size_t         z;
 
-    // save the orginal source
+    // save the original source
     if (!inaddr || (strlen(inaddr) >= sizeof(temp)))
     {
         return false;

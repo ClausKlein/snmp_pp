@@ -382,7 +382,7 @@ public:
      *
      * @param buf
      *    a buffer (of at least 18 characters, for the default method)
-     *    into which to place a string containg the current time.
+     *    into which to place a string containing the current time.
      *    If no buffer is supplied, a static area is used.
      * @return
      *    a string containing the current time. Either the supplied
@@ -397,7 +397,7 @@ public:
      * string, using delete [].
      *
      * @return
-     *    a string containg the current time.
+     *    a string containing the current time.
      */
     static const char* get_current_time();
 
@@ -629,7 +629,7 @@ protected:
     static SnmpSynchronized mutex;
 #endif
 
-    // XXX: unsued CK? static const char defaultName;
+    // XXX: unused CK? static const char defaultName;
 };
 
 #ifdef SNMP_PP_NAMESPACE

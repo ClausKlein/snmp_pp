@@ -65,7 +65,7 @@ SnmpSyntax& Counter32::operator=(const SnmpSyntax&in_val)
 {
     if (this == &in_val)
     {
-        return *this;           // handle assignement from itself
+        return *this;           // handle assignment from itself
     }
     valid_flag = false;         // will get set true if really valid
     if (in_val.valid())

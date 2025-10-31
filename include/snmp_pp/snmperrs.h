@@ -101,45 +101,46 @@ namespace Snmp_pp
 //@{
 
 // General
-#define SNMP_CLASS_SUCCESS          0  //!< success
-#define SNMP_CLASS_ERROR            -1 //!< general error
-#define SNMP_CLASS_RESOURCE_UNAVAIL -2 //!< e.g., malloc failed
-#define SNMP_CLASS_INTERNAL_ERROR   -3 //!< unexpected / internal error
-#define SNMP_CLASS_UNSUPPORTED      -4 //!< unsupported function
+#define SNMP_CLASS_SUCCESS          0    //!< success
+#define SNMP_CLASS_ERROR            (-1) //!< general error
+#define SNMP_CLASS_RESOURCE_UNAVAIL (-2) //!< e.g., malloc failed
+#define SNMP_CLASS_INTERNAL_ERROR   (-3) //!< unexpected / internal error
+#define SNMP_CLASS_UNSUPPORTED      (-4) //!< unsupported function
 
 // Callback reasons:
-#define SNMP_CLASS_TIMEOUT        -5 //!< outstanding request timed out
-#define SNMP_CLASS_ASYNC_RESPONSE -6 //!< received response for outstd request
-#define SNMP_CLASS_NOTIFICATION   -7 //!< received notification (trap/inform)
+#define SNMP_CLASS_TIMEOUT (-5)      //!< outstanding request timed out
+#define SNMP_CLASS_ASYNC_RESPONSE \
+    (-6)                             //!< received response for outstd request
+#define SNMP_CLASS_NOTIFICATION (-7) //!< received notification (trap/inform)
 #define SNMP_CLASS_SESSION_DESTROYED \
-    -8 //!< snmp::destroyed with oustanding reqs pending
+    (-8) //!< snmp::destroyed with outstanding reqs pending
 
 // Snmp Class:
-#define SNMP_CLASS_INVALID          -10 //!< snmp::mf called on invalid instance
-#define SNMP_CLASS_INVALID_PDU      -11 //!< invalid pdu passed to mf
-#define SNMP_CLASS_INVALID_TARGET   -12 //!< invalid target passed to mf
-#define SNMP_CLASS_INVALID_CALLBACK -13 //!< invalid callback to mf
-#define SNMP_CLASS_INVALID_REQID    -14 //!< invalid request id to cancel
-#define SNMP_CLASS_INVALID_NOTIFYID -15 //!< missing trap/inform oid
+#define SNMP_CLASS_INVALID          (-10) //!< snmp::mf called on invalid instance
+#define SNMP_CLASS_INVALID_PDU      (-11) //!< invalid pdu passed to mf
+#define SNMP_CLASS_INVALID_TARGET   (-12) //!< invalid target passed to mf
+#define SNMP_CLASS_INVALID_CALLBACK (-13) //!< invalid callback to mf
+#define SNMP_CLASS_INVALID_REQID    (-14) //!< invalid request id to cancel
+#define SNMP_CLASS_INVALID_NOTIFYID (-15) //!< missing trap/inform oid
 #define SNMP_CLASS_INVALID_OPERATION \
-    -16 //!< snmp operation not allowed for specified target
-#define SNMP_CLASS_INVALID_OID     -17 //!< invalid oid passed to mf
-#define SNMP_CLASS_INVALID_ADDRESS -18 //!< invalid address passed to mf
+    (-16) //!< snmp operation not allowed for specified target
+#define SNMP_CLASS_INVALID_OID     (-17) //!< invalid oid passed to mf
+#define SNMP_CLASS_INVALID_ADDRESS (-18) //!< invalid address passed to mf
 #define SNMP_CLASS_ERR_STATUS_SET \
-    -19 //!< agent returned response pdu with error_status set
+    (-19) //!< agent returned response pdu with error_status set
 
 // Transport Errors:
-#define SNMP_CLASS_TL_UNSUPPORTED   -20 //!< transport unsupported
-#define SNMP_CLASS_TL_IN_USE        -21 //!< transport in use
-#define SNMP_CLASS_TL_FAILED        -22 //!< transport operation failed
-#define SNMP_CLASS_TL_ACCESS_DENIED -23 //!< transport missing rights
+#define SNMP_CLASS_TL_UNSUPPORTED   (-20) //!< transport unsupported
+#define SNMP_CLASS_TL_IN_USE        (-21) //!< transport in use
+#define SNMP_CLASS_TL_FAILED        (-22) //!< transport operation failed
+#define SNMP_CLASS_TL_ACCESS_DENIED (-23) //!< transport missing rights
 
 // extras
-#define SNMP_CLASS_SHUTDOWN -24 //!< used for back door shutdown
+#define SNMP_CLASS_SHUTDOWN (-24) //!< used for back door shutdown
 
 // ASN.1 parse errors
-#define SNMP_CLASS_BADVERSION -50 //!< unsupported version
-#define SNMP_CLASS_ASN1ERROR  -51 //!< used for ASN.1 parse errors
+#define SNMP_CLASS_BADVERSION (-50) //!< unsupported version
+#define SNMP_CLASS_ASN1ERROR  (-51) //!< used for ASN.1 parse errors
 //@}
 
 #define MAX_POS_ERROR SNMP_ERROR_INCONSIS_NAME

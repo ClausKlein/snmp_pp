@@ -206,7 +206,8 @@ UdId CUDEventQueue::MakeId()
 {
     UdId id = 0;
 
-    do {
+    do
+    {
         lock(); // FIXME: not exception save! CK
         id = ++m_id;
         unlock();

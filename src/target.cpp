@@ -116,7 +116,7 @@ SnmpTarget* SnmpTarget::clone() const
 }
 
 //=============[ int operator == SnmpTarget, SnmpTarget ]======================
-// equivlence operator overloaded
+// equivalence operator overloaded
 int SnmpTarget::operator==(const SnmpTarget& rhs) const
 {
     if (my_address != rhs.my_address)
@@ -243,7 +243,7 @@ CTarget& CTarget::operator=(const CTarget& target)
 }
 
 //=============[ int operator == CTarget, CTarget ]==========================
-// equivlence operator overloaded
+// equivalence operator overloaded
 int CTarget::operator==(const CTarget& rhs) const
 {
     if (SnmpTarget::operator==(rhs) == 0)
@@ -402,7 +402,7 @@ UTarget& UTarget::operator=(const UTarget& target)
 }
 
 //=============[ int operator == UTarget, UTarget ]==========================
-// equivlence operator overloaded
+// equivalence operator overloaded
 int UTarget::operator==(const UTarget& rhs) const
 {
     if (SnmpTarget::operator==(rhs) == 0)

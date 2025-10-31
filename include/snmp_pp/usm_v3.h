@@ -142,7 +142,7 @@ namespace Snmp_pp
 //@{
 #    define SNMPv3_USM_MAX_ERROR  SNMPv3_USM_FILEREAD_ERROR
 #    define SNMPv3_USM_MIN_ERROR  SNMPv3_USM_OK
-#    define SNMPv3_USM_ERRORCOUNT SNMPv3_USM_MAX_ERROR - SNMPv3_USM_MIN_ERROR
+#    define SNMPv3_USM_ERRORCOUNT (SNMPv3_USM_MAX_ERROR - SNMPv3_USM_MIN_ERROR)
 //@}
 
 #    define oidUsmStats                     "1.3.6.1.6.3.15.1.1"
@@ -349,7 +349,7 @@ public:
      * keys for the given passwords. Then it calls add_localized_user()
      * to add/replace the localized entry for the user.
      *
-     * The passwords are not stored, so no additonal engine id discovery
+     * The passwords are not stored, so no additional engine id discovery
      * is possible.
      *
      * @param user_name         - The name of the user (in the USM)
@@ -913,7 +913,7 @@ protected:
      *                                 the request was parsed. For request,
      * this param has to be NULL. The reference is deleted by this function.
      * @param wholeMsg         - OUT: the buffer for the whole message
-     * @param wholeMsgLength   - IN:  lenght of the buffer.
+     * @param wholeMsgLength   - IN:  length of the buffer.
      *                           OUT: length of the generated message
      *
      * @return - SNMPv3_USM_OK on success. See snmperrs.h for the error codes

@@ -61,7 +61,7 @@
 #    define NS_INT16SZ   2
 #    define NS_INADDRSZ  4
 #    define NS_IN6ADDRSZ 16
-// XXX alrady defined! CK #define EAFNOSUPPORT    WSAEAFNOSUPPORT
+// XXX already defined! CK #define EAFNOSUPPORT    WSAEAFNOSUPPORT
 #    define ENOSPC 28
 
 /*
@@ -127,7 +127,7 @@ const char* inet_ntop(int af, const void* src, char* dst, size_t size)
  * return:
  *	`dst' (as a const)
  * notes:
- *	(1) uses no statics
+ *	(1) uses no statistics
  *	(2) takes a unsigned char* not an in_addr as input
  * author:
  *	Paul Vixie, 1996.

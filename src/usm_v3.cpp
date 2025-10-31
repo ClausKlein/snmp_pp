@@ -58,7 +58,7 @@ static const char* loggerModuleName = "snmp++.usm_v3";
 #        define BEGIN_REENTRANT_CODE_BLOCK_CONST \
             SnmpSynchronize auto_lock(           \
                 *(PP_CONST_CAST(SnmpSynchronized*, this)))
-#        define BEGIN_AUTO_LOCK(obj) SnmpSynchronize auto_lock(*obj)
+#        define BEGIN_AUTO_LOCK(obj) SnmpSynchronize auto_lock(*(obj))
 #    else
 #        define BEGIN_REENTRANT_CODE_BLOCK
 #        define BEGIN_REENTRANT_CODE_BLOCK_CONST
@@ -467,7 +467,7 @@ public:
     /**
      * Get a user of the usmUserTable.
      *
-     * @note call delete_cloned_entry() with the retruned pointer.
+     * @note call delete_cloned_entry() with the returned pointer.
      *
      * @param engine_id - Get a user for this engine id
      * @param sec_name  - Get the user with this security name
@@ -1658,7 +1658,7 @@ int USM::generate_msg(unsigned char* globalData, // message header, admin data
     unsigned char*               wholeMsgPtr  = nullptr;
     int                          startAuthPar = 0;
     struct UsmUser*              user         = nullptr;
-    struct UsmSecurityParameters usmSecurityParams { };
+    struct UsmSecurityParameters usmSecurityParams {};
 
     int       bufLength   = 0;
     SmiUINT32 buf2Length  = buffer2.get_len();
@@ -1891,7 +1891,7 @@ int USM::generate_msg(unsigned char* globalData, // message header, admin data
             auth_priv->get_auth_params_len(user->authProtocol);
         usmSecurityParams.msgAuthenticationParameters =
             new unsigned char[usmSecurityParams
-                                  .msgAuthenticationParametersLength];
+                    .msgAuthenticationParametersLength];
         memset((char*)(usmSecurityParams.msgAuthenticationParameters), 0,
             usmSecurityParams.msgAuthenticationParametersLength);
 

@@ -79,8 +79,8 @@ typedef SmiUINT32 oid_t;
 #define ASN_EXTENSION_ID (0x1F)
 #define ASN_BIT8         (0x80)
 
-#define IS_CONSTRUCTOR(byte)  ((byte)&ASN_CONSTRUCTOR)
-#define IS_EXTENSION_ID(byte) (((byte)&ASN_EXTENSION_ID) == ASN_EXTENSION_ID)
+#define IS_CONSTRUCTOR(byte)  ((byte) & ASN_CONSTRUCTOR)
+#define IS_EXTENSION_ID(byte) (((byte) & ASN_EXTENSION_ID) == ASN_EXTENSION_ID)
 
 #define ASN_UNI_PRIM (ASN_UNIVERSAL | ASN_PRIMITIVE)
 #define ASN_SEQ_CON  (ASN_SEQUENCE | ASN_CONSTRUCTOR)
@@ -307,7 +307,7 @@ DLLOPT void clear_pdu(struct snmp_pdu* pdu, bool clear_all = false);
  * @param securityModel  - The security model
  *
  * @return - Pointer to the first free byte in the buffer or
- *           NULL if an error occured
+ *           NULL if an error occurred
  */
 DLLOPT unsigned char* asn1_build_header_data(unsigned char* outBuf,
     int* maxLength, SmiINT32 msgID, SmiINT32 maxMessageSize,
@@ -390,7 +390,7 @@ DLLOPT unsigned char* asn1_parse_scoped_pdu(unsigned char* scoped_pdu,
  * param dataLength        - The length of the data
  *
  * @return - Pointer to the first free byte in the buffer or
- *           NULL if an error occured
+ *           NULL if an error occurred
  */
 DLLOPT unsigned char* asn1_build_scoped_pdu(unsigned char* outBuf,
     int* max_len, unsigned char* contextEngineID, long contextEngineIDLength,

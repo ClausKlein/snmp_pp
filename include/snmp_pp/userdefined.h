@@ -160,7 +160,7 @@ public:
     int DoRetries(const msec& /*sendtime*/) override
     {
         return SNMP_CLASS_SUCCESS;
-    }                                 // no timeouts, so just return;
+    } // no timeouts, so just return;
 
     int Done() override { return 0; } // we are never done
 

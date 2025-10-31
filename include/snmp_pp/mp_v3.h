@@ -57,32 +57,32 @@ class OctetStr;
 
 /** @name Error codes of the v3MP */
 //@{
-#    define SNMPv3_MP_ERROR                      -1400
-#    define SNMPv3_MP_OK                         -1401
-#    define SNMPv3_MP_UNSUPPORTED_SECURITY_MODEL -1402
-#    define SNMPv3_MP_NOT_IN_TIME_WINDOW         -1403
-#    define SNMPv3_MP_DOUBLED_MESSAGE            -1404
-#    define SNMPv3_MP_INVALID_MESSAGE            -1405
-#    define SNMPv3_MP_INVALID_ENGINEID           -1406
-#    define SNMPv3_MP_NOT_INITIALIZED            -1407
-#    define SNMPv3_MP_PARSE_ERROR                -1408
-#    define SNMPv3_MP_UNKNOWN_MSGID              -1409
-#    define SNMPv3_MP_MATCH_ERROR                -1410
-#    define SNMPv3_MP_COMMUNITY_ERROR            -1411
-#    define SNMPv3_MP_WRONG_USER_NAME            -1412
-#    define SNMPv3_MP_BUILD_ERROR                -1413
-#    define SNMPv3_MP_USM_ERROR                  -1414
-#    define SNMPv3_MP_UNKNOWN_PDU_HANDLERS       -1415
-#    define SNMPv3_MP_UNAVAILABLE_CONTEXT        -1416
-#    define SNMPv3_MP_UNKNOWN_CONTEXT            -1417
-#    define SNMPv3_MP_REPORT_SENT                -1418
+#    define SNMPv3_MP_ERROR                      (-1400)
+#    define SNMPv3_MP_OK                         (-1401)
+#    define SNMPv3_MP_UNSUPPORTED_SECURITY_MODEL (-1402)
+#    define SNMPv3_MP_NOT_IN_TIME_WINDOW         (-1403)
+#    define SNMPv3_MP_DOUBLED_MESSAGE            (-1404)
+#    define SNMPv3_MP_INVALID_MESSAGE            (-1405)
+#    define SNMPv3_MP_INVALID_ENGINEID           (-1406)
+#    define SNMPv3_MP_NOT_INITIALIZED            (-1407)
+#    define SNMPv3_MP_PARSE_ERROR                (-1408)
+#    define SNMPv3_MP_UNKNOWN_MSGID              (-1409)
+#    define SNMPv3_MP_MATCH_ERROR                (-1410)
+#    define SNMPv3_MP_COMMUNITY_ERROR            (-1411)
+#    define SNMPv3_MP_WRONG_USER_NAME            (-1412)
+#    define SNMPv3_MP_BUILD_ERROR                (-1413)
+#    define SNMPv3_MP_USM_ERROR                  (-1414)
+#    define SNMPv3_MP_UNKNOWN_PDU_HANDLERS       (-1415)
+#    define SNMPv3_MP_UNAVAILABLE_CONTEXT        (-1416)
+#    define SNMPv3_MP_UNKNOWN_CONTEXT            (-1417)
+#    define SNMPv3_MP_REPORT_SENT                (-1418)
 //@}
 
 /** @name Statistics on error codes. */
 //@{
 #    define SNMPv3_MP_MAX_ERROR  SNMPv3_MP_ERROR
 #    define SNMPv3_MP_MIN_ERROR  SNMPv3_MP_REPORT_SENT
-#    define SNMPv3_MP_ERRORCOUNT SNMPv3_MP_MAX_ERROR - SNMPv3_MP_MIN_ERROR
+#    define SNMPv3_MP_ERRORCOUNT (SNMPv3_MP_MAX_ERROR - SNMPv3_MP_MIN_ERROR)
 //@}
 
 class Snmp;
@@ -150,7 +150,7 @@ public:
     USM* get_usm() { return usm; }
 
     /**
-     * Free all allocated ressources of the v3MP and leave it in an
+     * Free all allocated resources of the v3MP and leave it in an
      * uninitialized state. After a call to this function, you can use
      * mpInit() to reinitialize the v3MP.
      *
@@ -162,7 +162,7 @@ public:
      *
      * In this table all known engine ids are stored. If the discovery
      * mode of the USM is enabled, snmp++ will add entries to this table
-     * whenever a new engine id is dicovered.
+     * whenever a new engine id is discovered.
      *
      * @param snmpEngineID - The engine id
      * @param host      - The numerical IP address
@@ -242,7 +242,7 @@ public:
     int reset_engine_id_table() { return engine_id_table.reset(); }
 
     /**
-     * Remove all occurences of this engine id from v3MP and USM.
+     * Remove all occurrences of this engine id from v3MP and USM.
      *
      * @param snmpEngineID - The engine id to remove
      *
@@ -314,7 +314,7 @@ protected:
      * @param msgSecurityModel - OUT: The security model used
      * @param spp_version      - OUT: SNMP version (SNMPv3)
      * @param from_address     - Where the message came from (used to send
-     *                           a report if neccessary)
+     *                           a report if necessary)
      *
      * @return - SNMPv3_MP_OK or any error listed in snmperr.h
      */
@@ -400,7 +400,7 @@ private:
      *                      encrypted, the request id is extracted
      * @param scopedPDULength - The lkength of the scopedPDU
      * @param pdu         - The pdu structure.
-     * @param errorCode   - The code of the error that occured.
+     * @param errorCode   - The code of the error that occurred.
      * @param sLevel      - Send the report with this security level.
      * @param sModel      - Use this security model.
      * @param sName       - Use this security name
@@ -562,7 +562,7 @@ private:
          * @param context_engine_id  - The context_engine_id
          * @param context_name      - The context_name
          * @param sec_state_ref - The reference of the USM
-         * @param error_code        - The code of the error that occured while
+         * @param error_code        - The code of the error that occurred while
          *                           parsing the received message
          *
          * @return - SNMPv3_MP_OK, SNMPv3_MP_ERROR or SNMPv3_DOUBLED_MESSAGE
@@ -613,7 +613,7 @@ private:
          * delete the entry from the cache.
          *
          * @param searchedID - Search for this message id
-         * @param res        - IN:  Pointer to an empy structure
+         * @param res        - IN:  Pointer to an empty structure
          *                     OUT: The filled structure
          *
          * @return - SNMPv3_MP_ERROR, SNMPv3_MP_OK
